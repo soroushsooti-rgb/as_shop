@@ -1,0 +1,44 @@
+{
+  "doctype": "DocType",
+  "name": "AS Shop Product Image",
+  "module": "AS Shop",
+  "custom": 0,
+  "engine": "InnoDB",
+  "field_order": [
+    "image",
+    "caption",
+    "caption_en",
+    "alt_text"
+  ],
+  "fields": [
+    {
+      "fieldname": "image",
+      "fieldtype": "Attach Image",
+      "label": "Image",
+      "reqd": 1,
+      "in_list_view": 1,
+      "description": "تصویر عمومی گالری؛ فایل خصوصی در سایت نمایش داده نمی‌شود."
+    },
+    {
+      "fieldname": "caption",
+      "fieldtype": "Small Text",
+      "label": "Caption",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "caption_en",
+      "fieldtype": "Small Text",
+      "label": "English Caption"
+    },
+    {
+      "fieldname": "alt_text",
+      "fieldtype": "Data",
+      "label": "Image Alt Text"
+    }
+  ],
+  "permissions": [],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "istable": 1,
+  "editable_grid": 1
+}

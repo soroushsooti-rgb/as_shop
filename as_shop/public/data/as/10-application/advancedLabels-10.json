@@ -1,0 +1,42 @@
+{
+  "density": [
+    "Infill (%)",
+    "درصد پرشدگی (%)"
+  ],
+  "walls": [
+    "Wall loops",
+    "تعداد دیواره‌ها (Wall loops)"
+  ],
+  "layerHeight": [
+    "Layer height (mm)",
+    "ارتفاع لایه (میلی‌متر)"
+  ],
+  "initialLayerHeight": [
+    "Initial layer height (mm)",
+    "ارتفاع لایهٔ اول (میلی‌متر)"
+  ],
+  "nozzle": [
+    "Nozzle diameter (mm)",
+    "قطر نازل (میلی‌متر)"
+  ],
+  "topLayers": [
+    "Top solid layers",
+    "تعداد لایه‌های توپر بالا"
+  ],
+  "bottomLayers": [
+    "Bottom solid layers",
+    "تعداد لایه‌های توپر پایین"
+  ],
+  "speed": [
+    "Print speed (mm/s)",
+    "سرعت چاپ (میلی‌متر بر ثانیه)"
+  ],
+  "nozzleTemperature": [
+    "Nozzle temperature (°C)",
+    "دمای نازل (درجهٔ سانتی‌گراد)"
+  ],
+  "bedTemperature": [
+    "Bed temperature (°C)",
+    "دمای صفحهٔ چاپ (درجهٔ سانتی‌گراد)"
+  ]
+}

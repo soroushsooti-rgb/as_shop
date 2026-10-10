@@ -1,0 +1,18 @@
+[build-system]
+requires = ["flit_core>=3.4,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "as_shop"
+description = "AS Shop: independent Frappe website"
+authors = [{ name = "SHN" }]
+readme = "README.md"
+requires-python = ">=3.10"
+dynamic = ["version"]
+
+[tool.bench.frappe-dependencies]
+frappe = ">=15.0.0,<18.0.0"
+
+[tool.flit.sdist]
+include = ["website.json", "tools/build.py", "docs/", "README.md"]
+exclude = ["__pycache__/", "*.pyc"]

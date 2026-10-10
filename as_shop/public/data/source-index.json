@@ -1,0 +1,17 @@
+{
+  "as/02-language-init/SITE_EN-1": "data/as/02-language-init/SITE_EN-1.json",
+  "as/02-language-init/SITE_FA-2": "data/as/02-language-init/SITE_FA-2.json",
+  "as/05-offline-assets/AS_OFFLINE_ASSETS-1": "data/as/05-offline-assets/AS_OFFLINE_ASSETS-1.json",
+  "as/07-pricing-config/PRICING_CONFIG-1": "data/as/07-pricing-config/PRICING_CONFIG-1.json",
+  "as/08-drawing-worker/AS_WORKER_SOURCE-1": "data/as/08-drawing-worker/AS_WORKER_SOURCE-1.json",
+  "as/10-application/materials-1": "data/as/10-application/materials-1.json",
+  "as/10-application/metals-2": "data/as/10-application/metals-2.json",
+  "as/10-application/descriptions-3": "data/as/10-application/descriptions-3.json",
+  "as/10-application/rows-4": "data/as/10-application/rows-4.json",
+  "as/10-application/formDefinitions-5": "data/as/10-application/formDefinitions-5.json",
+  "as/10-application/guides-6": "data/as/10-application/guides-6.json",
+  "as/10-application/descriptions-7": "data/as/10-application/descriptions-7.json",
+  "as/10-application/ECO_PETS-8": "data/as/10-application/ECO_PETS-8.json",
+  "as/10-application/ECO_CATEGORIES-9": "data/as/10-application/ECO_CATEGORIES-9.json",
+  "as/10-application/advancedLabels-10": "data/as/10-application/advancedLabels-10.json"
+}

@@ -1,0 +1,102 @@
+[
+  {
+    "id": "ALUMINIUM",
+    "name": [
+      "Aluminum",
+      "آلومینیوم"
+    ],
+    "color": "#becbd0",
+    "use": [
+      "Lightweight housings and brackets",
+      "بدنه و براکت سبک"
+    ],
+    "detail": [
+      "Alloy and temper determine strength, corrosion behavior and machinability. Anodizing compatibility must be checked.",
+      "آلیاژ و عملیات حرارتی، استحکام، خوردگی و ماشین‌کاری‌پذیری را تعیین می‌کنند. امکان آندایز باید بررسی شود."
+    ],
+    "finish": [
+      "Brushed / anodized after review",
+      "برس‌خورده / آندایز پس از بررسی"
+    ]
+  },
+  {
+    "id": "BRASS",
+    "name": [
+      "Brass",
+      "برنج"
+    ],
+    "color": "#bd9850",
+    "use": [
+      "Fittings and decorative machined parts",
+      "اتصالات و قطعات تزئینی ماشین‌کاری‌شده"
+    ],
+    "detail": [
+      "A copper-zinc alloy family. Grade affects machinability, corrosion and suitability for the intended contact.",
+      "خانواده‌ای از آلیاژ مس و روی. گرید بر ماشین‌کاری، خوردگی و سازگاری با کاربرد اثر دارد."
+    ],
+    "finish": [
+      "Raw / polished after review",
+      "خام / پولیش پس از بررسی"
+    ]
+  },
+  {
+    "id": "MILD_STEEL",
+    "name": [
+      "Mild steel",
+      "فولاد کم‌کربن"
+    ],
+    "color": "#7d858b",
+    "use": [
+      "Frames, brackets and general fabrication",
+      "قاب، براکت و ساخت عمومی"
+    ],
+    "detail": [
+      "Specify grade, corrosion protection and welding or forming requirements.",
+      "گرید، محافظت در برابر خوردگی و نیازهای جوشکاری یا شکل‌دهی را مشخص کنید."
+    ],
+    "finish": [
+      "Deburred / painted",
+      "پلیسه‌گیری / رنگ‌شده"
+    ]
+  },
+  {
+    "id": "STAINLESS",
+    "name": [
+      "Stainless steel",
+      "فولاد ضدزنگ"
+    ],
+    "color": "#d2d8d6",
+    "use": [
+      "Parts needing corrosion resistance",
+      "قطعات نیازمند مقاومت به خوردگی"
+    ],
+    "detail": [
+      "Resistance depends on alloy and environment. “Stainless” does not mean immune to all corrosion.",
+      "مقاومت به آلیاژ و محیط بستگی دارد. فولاد ضدزنگ در برابر همهٔ انواع خوردگی مصون نیست."
+    ],
+    "finish": [
+      "Brushed / polished",
+      "برس‌خورده / پولیش‌شده"
+    ]
+  },
+  {
+    "id": "COPPER",
+    "name": [
+      "Copper",
+      "مس"
+    ],
+    "color": "#bd7b59",
+    "use": [
+      "Thermal and electrical components",
+      "قطعات حرارتی و الکتریکی"
+    ],
+    "detail": [
+      "Specify conductivity requirements, grade, oxidation and the intended manufacturing process.",
+      "رسانایی موردنیاز، گرید، اکسیدشدن و روش ساخت را مشخص کنید."
+    ],
+    "finish": [
+      "Raw / polished after review",
+      "خام / پولیش پس از بررسی"
+    ]
+  }
+]

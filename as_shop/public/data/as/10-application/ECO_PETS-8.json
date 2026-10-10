@@ -1,0 +1,77 @@
+[
+  {
+    "id": "french-bulldog",
+    "name": "French Bulldog",
+    "image": "/assets/as_shop/media/images/665668adc3d49cb179db.jpg"
+  },
+  {
+    "id": "cream-persian",
+    "name": "Cream Persian Cat",
+    "image": "/assets/as_shop/media/images/6f4dfda8401aa17d8160.jpg"
+  },
+  {
+    "id": "pomeranian",
+    "name": "Pomeranian",
+    "image": "/assets/as_shop/media/images/97234b1a2dd549fe3269.jpg"
+  },
+  {
+    "id": "tuxedo-cat",
+    "name": "Tuxedo Cat",
+    "image": "/assets/as_shop/media/images/ecac0d5c8cc8e592e203.jpg"
+  },
+  {
+    "id": "shih-tzu",
+    "name": "Shih Tzu",
+    "image": "/assets/as_shop/media/images/7f7e551b97869468aa8a.jpg"
+  },
+  {
+    "id": "chihuahua",
+    "name": "Chihuahua",
+    "image": "/assets/as_shop/media/images/a2fcd49bdec12e0680e8.jpg"
+  },
+  {
+    "id": "yellow-poodle",
+    "name": "Poodle in Yellow",
+    "image": "/assets/as_shop/media/images/afcf7cb0496a468d442c.jpg"
+  },
+  {
+    "id": "pink-poodle",
+    "name": "Poodle in Pink",
+    "image": "/assets/as_shop/media/images/1775878a4675735dcc86.jpg"
+  },
+  {
+    "id": "blue-poodle",
+    "name": "Poodle in Blue",
+    "image": "/assets/as_shop/media/images/0a2dce9c0ae71153580e.jpg"
+  },
+  {
+    "id": "black-duck",
+    "name": "Black Mood Duck",
+    "image": "/assets/as_shop/media/images/e768ae49108584ecdadd.jpg"
+  },
+  {
+    "id": "yellow-duck",
+    "name": "Yellow Mood Duck",
+    "image": "/assets/as_shop/media/images/6c9eb4b65911c2e249eb.jpg"
+  },
+  {
+    "id": "white-persian",
+    "name": "White Persian Cat",
+    "image": "/assets/as_shop/media/images/5cb4826034a13a11adbb.jpg"
+  },
+  {
+    "id": "grey-persian",
+    "name": "Grey Persian Cat",
+    "image": "/assets/as_shop/media/images/32096ccac8241092e8e4.jpg"
+  },
+  {
+    "id": "dachshund",
+    "name": "Dachshund",
+    "image": "/assets/as_shop/media/images/69d936a3aaf03a88e485.jpg"
+  },
+  {
+    "id": "black-persian",
+    "name": "Black Persian Cat",
+    "image": "/assets/as_shop/media/images/9fedab4d35ba784eb6e4.jpg"
+  }
+]

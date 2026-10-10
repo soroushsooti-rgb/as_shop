@@ -1,0 +1,135 @@
+/* مسئولیت این فایل: ظاهر مسیر درخواست و راهنمای کاربر. */
+/* SHN / as / customer-flow. Original cascade position: 3. */
+.customer-profiles,
+.customer-bundle-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  direction: ltr;
+}
+.customer-profiles button,
+.customer-bundle-grid button {
+  padding: 16px 12px;
+  text-align: start;
+  border: 1px solid #89938c;
+  background: #f5f6ee;
+  color: #18271e;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.customer-profiles button[aria-pressed="true"] {
+  background: #d7ef58;
+  border: 2px solid #263f2c;
+}
+.customer-profiles strong,
+.customer-profiles span,
+.customer-profiles small,
+.customer-bundle-grid strong,
+.customer-bundle-grid span,
+.customer-bundle-grid b,
+.customer-bundle-grid small {
+  display: block;
+  margin: 5px 0;
+}
+.customer-profiles span {
+  font-size: 12px;
+}
+.customer-bundles {
+  padding-top: 42px;
+  padding-bottom: 42px;
+}
+.customer-bundle-grid strong {
+  font-size: clamp(18px, 2.5vw, 28px);
+}
+.customer-bundle-grid button:nth-child(3) {
+  background: #d7ef58;
+}
+.customer-bundle-grid b {
+  margin-top: 20px;
+}
+.customer-estimate {
+  background: #edf2e3;
+  color: #192a20;
+  padding: 22px;
+  border-radius: 14px;
+  margin: 22px 0;
+}
+.customer-estimate p {
+  font-size: 13px;
+  line-height: 1.9;
+}
+.customer-totals {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.customer-totals strong,
+.customer-totals small {
+  display: block;
+}
+.customer-totals strong {
+  font-size: 25px;
+  margin-top: 8px;
+}
+#customerContactForm input,
+#customerContactForm textarea {
+  background: #fff;
+  color: #17271c;
+}
+#customerMessage,
+#customerBundleProgress {
+  margin: 18px 0;
+  color: inherit;
+  font-weight: 700;
+  line-height: 1.8;
+}
+.customer-color-sample {
+  height: 60px;
+  border: 1px solid #89938c;
+  border-radius: 12px;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.customer-color-sample span {
+  background: #fff;
+  color: #18271e;
+  border-radius: 20px;
+  padding: 4px 13px;
+}
+.customer-journey {
+  padding: 28px;
+  background: #edf0e8;
+  color: #203126;
+  margin-top: 28px;
+  margin-bottom: 28px;
+  border-radius: 14px;
+}
+.customer-journey p {
+  line-height: 1.9;
+}
+.cx-easy-more summary .localized-run {
+  transform: none !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+}
+bdi.localized-run {
+  font-weight: inherit;
+}
+@media (max-width: 650px) {
+  .customer-profiles {
+    grid-template-columns: 1fr;
+  }
+  .customer-bundle-grid {
+    grid-template-columns: 1fr;
+  }
+  .customer-bundle-grid button {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    column-gap: 12px;
+  }
+  .customer-totals {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,128 @@
+[
+  {
+    "site": "as",
+    "kind": "javascript",
+    "file": "js/as/01-hero-image.js",
+    "role": "hero-image",
+    "original_order": 1
+  },
+  {
+    "site": "as",
+    "kind": "javascript",
+    "file": "js/as/02-language-init.js",
+    "role": "language-init",
+    "original_order": 2
+  },
+  {
+    "site": "as",
+    "kind": "javascript",
+    "file": "js/as/03-language-additions.js",
+    "role": "language-additions",
+    "original_order": 3
+  },
+  {
+    "site": "as",
+    "kind": "javascript",
+    "file": "js/as/04-shop-bundle-images.js",
+    "role": "shop-bundle-images",
+    "original_order": 4
+  },
+  {
+    "site": "as",
+    "kind": "javascript",
+    "file": "js/as/05-offline-assets.js",
+    "role": "offline-assets",
+    "original_order": 5
+  },
+  {
+    "site": "as",
+    "kind": "javascript",
+    "file": "js/as/06-three-vendor.js",
+    "role": "three-vendor",
+    "original_order": 6
+  },
+  {
+    "site": "as",
+    "kind": "javascript",
+    "file": "js/as/07-pricing-config.js",
+    "role": "pricing-config",
+    "original_order": 7
+  },
+  {
+    "site": "as",
+    "kind": "javascript",
+    "file": "js/as/08-drawing-worker.js",
+    "role": "drawing-worker",
+    "original_order": 8
+  },
+  {
+    "site": "as",
+    "kind": "javascript",
+    "file": "js/as/09-engineering-scene.js",
+    "role": "engineering-scene",
+    "original_order": 9
+  },
+  {
+    "site": "as",
+    "kind": "javascript",
+    "file": "js/as/10-application.js",
+    "role": "application",
+    "original_order": 10
+  },
+  {
+    "site": "as",
+    "kind": "javascript",
+    "file": "js/as/11-language-runtime.js",
+    "role": "language-runtime",
+    "original_order": 11
+  },
+  {
+    "site": "as",
+    "kind": "css",
+    "file": "css/as/01-base.css",
+    "role": "base",
+    "original_order": 1
+  },
+  {
+    "site": "as",
+    "kind": "css",
+    "file": "css/as/02-language.css",
+    "role": "language",
+    "original_order": 2
+  },
+  {
+    "site": "as",
+    "kind": "css",
+    "file": "css/as/03-customer-flow.css",
+    "role": "customer-flow",
+    "original_order": 3
+  },
+  {
+    "site": "as",
+    "kind": "css",
+    "file": "css/as/04-shop-layout.css",
+    "role": "shop-layout",
+    "original_order": 4
+  },
+  {
+    "site": "as",
+    "kind": "css",
+    "file": "css/as/05-shop-refinements.css",
+    "role": "shop-refinements",
+    "original_order": 5
+  },
+  {
+    "site": "as",
+    "kind": "css",
+    "file": "css/as/06-shop-hero.css",
+    "role": "shop-hero",
+    "original_order": 6
+  },
+  {
+    "site": "as",
+    "kind": "css",
+    "file": "css/as/template-overrides.css",
+    "role": "template-overrides",
+    "original_order": "static-view-styles"
+  }
+]

@@ -1,0 +1,42 @@
+[
+  [
+    "3D printed part",
+    "قطعهٔ چاپ سه‌بعدی",
+    "Plastic, resin or additive parts from prototype to repeat production.",
+    "قطعات پلاستیکی، رزینی و ساخت افزایشی؛ از نمونه‌سازی تا تولید سری.",
+    "/services/3d-printing",
+    "3D / STL / STEP"
+  ],
+  [
+    "Laser cut part",
+    "قطعهٔ برش لیزری",
+    "Flat parts from metal, acrylic, wood or MDF.",
+    "قطعات تخت از فلز، اکریلیک، چوب یا MDF.",
+    "/services/laser-cutting",
+    "DXF / SHEET"
+  ],
+  [
+    "CNC machined part",
+    "قطعهٔ ماشین‌کاری CNC",
+    "Precision machined parts from engineering materials.",
+    "قطعات دقیق ماشین‌کاری‌شده از مواد مهندسی.",
+    "/services/cnc",
+    "STEP / DRAWING"
+  ],
+  [
+    "Production run",
+    "تولید سری",
+    "Batch, assembly and scale-up planning.",
+    "برنامه‌ریزی تولید سری، مونتاژ و افزایش ظرفیت.",
+    "/services/production",
+    "BATCH / SCALE"
+  ],
+  [
+    "I only have an idea",
+    "فقط یک ایده دارم",
+    "Start with a sketch, reference or product idea.",
+    "با طرح اولیه، تصویر مرجع یا ایدهٔ محصول شروع کنید.",
+    "/engineering/start",
+    "SKETCH / IDEA"
+  ]
+]

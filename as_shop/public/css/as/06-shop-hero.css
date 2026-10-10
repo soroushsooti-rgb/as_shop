@@ -1,0 +1,107 @@
+/* مسئولیت این فایل: ظاهر عکس و لایهٔ بالای صفحهٔ فروشگاه. */
+/* SHN / as / shop-hero. Original cascade position: 6. */
+/* Full-width original photo with copy layered directly over its upper space. */
+.eco-shop .eco-creation-hero {
+  display: block !important;
+  position: relative !important;
+  width: 100% !important;
+  aspect-ratio: 1672/941;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  padding: 0 !important;
+  isolation: isolate;
+  background: #f1e6d5;
+}
+.eco-shop .eco-creation-hero > img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  margin: 0 !important;
+  z-index: 0;
+}
+.eco-shop .eco-creation-copy {
+  position: absolute !important;
+  top: clamp(18px, 2.1vw, 44px) !important;
+  left: 50% !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: translateX(-50%) !important;
+  width: min(90%, 760px) !important;
+  max-width: 760px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  z-index: 2;
+  text-align: center;
+  color: #163b29;
+}
+.eco-shop .eco-creation-copy h1 {
+  font-size: clamp(32px, 3vw, 48px) !important;
+  line-height: 1.12 !important;
+  margin: 10px auto 12px !important;
+  max-width: 760px !important;
+}
+.eco-shop .eco-creation-copy p {
+  font-size: clamp(14px, 1.2vw, 17px) !important;
+  line-height: 1.6 !important;
+  max-width: 660px !important;
+  margin: 0 auto 16px !important;
+}
+.eco-shop .eco-creation-copy .eco-actions {
+  justify-content: center !important;
+  gap: 10px !important;
+  margin: 0 !important;
+}
+.eco-shop .eco-creation-copy .button {
+  min-height: 44px;
+  padding: 12px 20px;
+  font-size: 14px;
+}
+.eco-shop .eco-creation-hero .eco-creation-steps {
+  position: absolute !important;
+  inset: auto 0 12px !important;
+  width: 100% !important;
+  padding: 8px 20px !important;
+  margin: 0 !important;
+  z-index: 2;
+  background: transparent !important;
+  justify-content: center;
+  gap: 24px;
+}
+@media (max-width: 850px) {
+  .eco-shop .eco-creation-hero {
+    aspect-ratio: auto;
+    min-height: 650px !important;
+  }
+  .eco-shop .eco-creation-hero > img {
+    object-fit: cover !important;
+    object-position: 65% center !important;
+  }
+  .eco-shop .eco-creation-copy {
+    top: 22px !important;
+    width: calc(100% - 36px) !important;
+  }
+  .eco-shop .eco-creation-copy h1 {
+    font-size: 34px !important;
+  }
+  .eco-shop .eco-creation-copy p {
+    font-size: 15px !important;
+  }
+  .eco-shop .eco-creation-hero:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(180deg, #f6eddef2 0%, #f6eddebd 28%, transparent 52%);
+    pointer-events: none;
+  }
+  .eco-shop .eco-creation-hero .eco-creation-steps {
+    font-size: 11px;
+    gap: 14px;
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "kitchen": [
+    "Kitchen & home",
+    "Storage accessories, countertop organisers, custom handles and useful household pieces.",
+    "A considered object for your everyday."
+  ],
+  "nfc": [
+    "NFC products",
+    "Tags, smart business cards, display stands and connected accessories.",
+    "Small objects that connect physical and digital."
+  ],
+  "gadgets": [
+    "Gadgets & accessories",
+    "Desk objects, stands, organisers and one-off practical ideas.",
+    "Useful ideas, made tangible."
+  ],
+  "home": [
+    "Home objects",
+    "Decorative and practical objects made around the space you live in.",
+    "Objects that belong in your space."
+  ],
+  "family": [
+    "Family figurines",
+    "فیگور خانوادگی",
+    "A familiar moment, made tangible."
+  ],
+  "idea": [
+    "Your idea",
+    "Tell us what you wish existed. A sketch, reference or short description is enough to start.",
+    "What should we make next?"
+  ]
+}

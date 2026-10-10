@@ -1,0 +1,282 @@
+[
+  {
+    "id": "PLA",
+    "name": [
+      "PLA",
+      " (PLA)"
+    ],
+    "tag": [
+      "Crisp visual models",
+      "مدل‌های نمایشی دقیق"
+    ],
+    "desc": [
+      "A straightforward starting point for visual prototypes and low-load indoor objects.",
+      "گزینه‌ای ساده برای نمونه‌های نمایشی و محصولات داخلی با بار کم."
+    ],
+    "use": [
+      "Models, desk accessories, fit checks",
+      "مدل، لوازم میز و آزمون انطباق"
+    ],
+    "watch": [
+      "Avoid heat-exposed or demanding load-bearing uses without testing.",
+      "برای کاربردهای در معرض گرما یا بار زیاد، ابتدا آزمایش کنید."
+    ],
+    "flex": [
+      "Rigid",
+      "سخت"
+    ],
+    "outdoor": [
+      "Not a first choice",
+      "گزینهٔ اول نیست"
+    ],
+    "process": [
+      "Accessible",
+      "ساده و در دسترس"
+    ]
+  },
+  {
+    "id": "PETG",
+    "name": [
+      "PETG",
+      " (PETG)"
+    ],
+    "tag": [
+      "Everyday functional parts",
+      "قطعات کاربردی روزمره"
+    ],
+    "desc": [
+      "A versatile starting point for enclosures, guards and functional printed parts.",
+      "گزینه‌ای کاربردی برای بدنه، محافظ و قطعات چاپی عملکردی."
+    ],
+    "use": [
+      "Enclosures, brackets, guards",
+      "بدنه، براکت و محافظ"
+    ],
+    "watch": [
+      "Check stringing, fit and grade-specific temperature limits.",
+      "رشته‌کشیدن حین چاپ، انطباق و محدودهٔ دمایی گرید را بررسی کنید."
+    ],
+    "flex": [
+      "Mostly rigid",
+      "نسبتاً سخت"
+    ],
+    "outdoor": [
+      "Confirm grade / exposure",
+      "بررسی گرید و شرایط محیطی"
+    ],
+    "process": [
+      "Moderate",
+      "متوسط"
+    ]
+  },
+  {
+    "id": "ABS",
+    "name": [
+      "ABS",
+      " (ABS)"
+    ],
+    "tag": [
+      "Tough, finishable",
+      "مقاوم و قابل‌پرداخت"
+    ],
+    "desc": [
+      "Useful for housings and functional prototypes when the process is well controlled.",
+      "برای بدنه و نمونه‌های کاربردی، با کنترل مناسب فرایند چاپ."
+    ],
+    "use": [
+      "Housings and fixtures",
+      "بدنه و فیکسچر"
+    ],
+    "watch": [
+      "Warping, ventilation and enclosure conditions matter.",
+      "تاب‌برداشتن، تهویه و شرایط محفظه مهم‌اند."
+    ],
+    "flex": [
+      "Rigid",
+      "سخت"
+    ],
+    "outdoor": [
+      "Consider ASA instead",
+      "بررسی ASA به‌عنوان جایگزین"
+    ],
+    "process": [
+      "Controlled enclosure",
+      "محفظهٔ کنترل‌شده"
+    ]
+  },
+  {
+    "id": "ASA",
+    "name": [
+      "ASA",
+      " (ASA)"
+    ],
+    "tag": [
+      "Outdoor applications",
+      "کاربردهای فضای باز"
+    ],
+    "desc": [
+      "A useful candidate when weather and UV exposure are central requirements.",
+      "گزینه‌ای قابل‌بررسی برای کاربردهای در معرض آب‌وهوا و تابش فرابنفش."
+    ],
+    "use": [
+      "Outdoor covers and fixtures",
+      "پوشش و قطعات فضای باز"
+    ],
+    "watch": [
+      "Grade, pigment, exposure, warping and ventilation still need review.",
+      "گرید، رنگ‌دانه، شرایط محیطی، تاب‌برداشتن و تهویه باید بررسی شوند."
+    ],
+    "flex": [
+      "Rigid",
+      "سخت"
+    ],
+    "outdoor": [
+      "A useful candidate",
+      "گزینه‌ای قابل‌بررسی"
+    ],
+    "process": [
+      "Controlled enclosure",
+      "محفظهٔ کنترل‌شده"
+    ]
+  },
+  {
+    "id": "TPU",
+    "name": [
+      "TPU",
+      " (TPU)"
+    ],
+    "tag": [
+      "Flexible and compliant",
+      "نرم و انعطاف‌پذیر"
+    ],
+    "desc": [
+      "For grips, bumpers and compliant parts; hardness varies significantly by grade.",
+      "برای دسته، ضربه‌گیر و قطعات انعطاف‌پذیر؛ سختی به گرید بستگی دارد."
+    ],
+    "use": [
+      "Grips and protective covers",
+      "دسته و پوشش محافظ"
+    ],
+    "watch": [
+      "Specify Shore hardness, load and required deformation.",
+      "سختی Shore، بار و میزان تغییرشکل موردنیاز را مشخص کنید."
+    ],
+    "flex": [
+      "Flexible",
+      "انعطاف‌پذیر"
+    ],
+    "outdoor": [
+      "Grade dependent",
+      "وابسته به گرید"
+    ],
+    "process": [
+      "Slower, specialized",
+      "کندتر و تخصصی"
+    ]
+  },
+  {
+    "id": "NYLON",
+    "name": [
+      "Nylon",
+      "نایلون"
+    ],
+    "tag": [
+      "Moving mechanical parts",
+      "قطعات مکانیکی متحرک"
+    ],
+    "desc": [
+      "A candidate for gears, clips and mechanisms where conditioning is controlled.",
+      "گزینه‌ای برای چرخ‌دنده، گیره و مکانیزم، با کنترل شرایط آماده‌سازی ماده."
+    ],
+    "use": [
+      "Gears, clips and mechanisms",
+      "چرخ‌دنده، گیره و مکانیزم"
+    ],
+    "watch": [
+      "Moisture changes properties; specify grade and conditioning.",
+      "رطوبت بر خواص اثر دارد؛ گرید و شرایط آماده‌سازی را مشخص کنید."
+    ],
+    "flex": [
+      "Grade dependent",
+      "وابسته به گرید"
+    ],
+    "outdoor": [
+      "Check datasheet",
+      "بررسی برگهٔ مشخصات"
+    ],
+    "process": [
+      "Drying important",
+      "خشک‌کردن ضروری است"
+    ]
+  },
+  {
+    "id": "PC",
+    "name": [
+      "Polycarbonate",
+      "پلی‌کربنات"
+    ],
+    "tag": [
+      "Heat / impact applications",
+      "کاربردهای در معرض گرما یا ضربه"
+    ],
+    "desc": [
+      "An engineering candidate for demanding parts with suitable equipment and testing.",
+      "گزینه‌ای مهندسی برای قطعات پرفشار، با تجهیزات مناسب و آزمایش."
+    ],
+    "use": [
+      "Fixtures and protective parts",
+      "فیکسچر و قطعات محافظ"
+    ],
+    "watch": [
+      "Requires compatible equipment and a named material grade.",
+      "به تجهیزات سازگار و گرید مشخص ماده نیاز دارد."
+    ],
+    "flex": [
+      "Rigid",
+      "سخت"
+    ],
+    "outdoor": [
+      "Grade dependent",
+      "وابسته به گرید"
+    ],
+    "process": [
+      "Demanding",
+      "نیازمند تجهیزات تخصصی"
+    ]
+  },
+  {
+    "id": "CF_NYLON",
+    "name": [
+      "Carbon-fiber nylon",
+      "نایلون تقویت‌شده با الیاف کربن"
+    ],
+    "tag": [
+      "Stiff functional components",
+      "قطعات کاربردی با سختی بالا"
+    ],
+    "desc": [
+      "Reinforced nylon for stiff jigs and brackets; fiber loading matters.",
+      "نایلون تقویت‌شده برای جیگ و براکت سخت؛ درصد الیاف مهم است."
+    ],
+    "use": [
+      "Jigs and brackets",
+      "جیگ و براکت"
+    ],
+    "watch": [
+      "Fiber content, moisture and layer orientation need review.",
+      "درصد الیاف، رطوبت و جهت لایه‌ها باید بررسی شوند."
+    ],
+    "flex": [
+      "Stiff",
+      "سخت و کم‌انعطاف"
+    ],
+    "outdoor": [
+      "Grade dependent",
+      "وابسته به گرید"
+    ],
+    "process": [
+      "Wear-resistant nozzle",
+      "نازل مقاوم به سایش"
+    ]
+  }
+]

@@ -1,0 +1,238 @@
+{
+  "idea": {
+    "title": [
+      "Tell us what you imagine.",
+      "بگویید چه در ذهن دارید."
+    ],
+    "description": [
+      "A sketch, reference image, or a few sentences is enough to start.",
+      "یک طرح اولیه، تصویر مرجع یا چند جمله برای شروع کافی است."
+    ],
+    "fields": [
+      [
+        "project",
+        "Project name",
+        " ",
+        "text",
+        true
+      ],
+      [
+        "description",
+        "What do you want to make? What problem does it solve?",
+        "        ",
+        "textarea",
+        true
+      ],
+      [
+        "use",
+        "How and where will it be used?",
+        "    ",
+        "textarea"
+      ],
+      [
+        "size",
+        "Approximate size",
+        " ",
+        "text"
+      ],
+      [
+        "quantity",
+        "Expected quantity",
+        " ",
+        "number"
+      ],
+      [
+        "budget",
+        "Target budget (include currency)",
+        "  (  )",
+        "text"
+      ]
+    ]
+  },
+  "cnc": {
+    "title": [
+      "Define the details that matter.",
+      "جزئیات مهم را مشخص کنید."
+    ],
+    "description": [
+      "Prepare a machining enquiry with the critical fit, finish and inspection requirements.",
+      "درخواست ماشین‌کاری را با نیازهای انطباق، پرداخت و بازرسی آماده کنید."
+    ],
+    "fields": [
+      [
+        "project",
+        "Part name",
+        " ",
+        "text",
+        true
+      ],
+      [
+        "description",
+        "Part function and requirements",
+        "   ",
+        "textarea",
+        true
+      ],
+      [
+        "material",
+        "Material / alloy",
+        " / ",
+        "text"
+      ],
+      [
+        "quantity",
+        "Quantity",
+        "",
+        "number",
+        true
+      ],
+      [
+        "tolerance",
+        "Critical dimensions, tolerances and threads",
+        "    ",
+        "textarea"
+      ],
+      [
+        "finish",
+        "Surface finish and inspection",
+        "   ",
+        "textarea"
+      ]
+    ]
+  },
+  "production": {
+    "title": [
+      "A batch today.<br>A production plan tomorrow.",
+      "امروز یک سری محصول،<br>فردا برنامهٔ تولید."
+    ],
+    "description": [
+      "Specify quantities, repeat schedules, packaging, quality and delivery requirements.",
+      "تعداد، برنامهٔ تکرار تولید، بسته‌بندی، کیفیت و تحویل را مشخص کنید."
+    ],
+    "fields": [
+      [
+        "project",
+        "Part / project name",
+        "  / ",
+        "text",
+        true
+      ],
+      [
+        "description",
+        "Part and manufacturing process",
+        "   ",
+        "textarea",
+        true
+      ],
+      [
+        "quantity",
+        "Quantity",
+        "",
+        "number",
+        true
+      ],
+      [
+        "repeat",
+        "One-time or recurring?",
+        "  ",
+        "text"
+      ],
+      [
+        "quality",
+        "Quality and inspection requirements",
+        "   ",
+        "textarea"
+      ],
+      [
+        "packaging",
+        "Packaging and previous production notes",
+        "   ",
+        "textarea"
+      ]
+    ]
+  },
+  "repair": {
+    "title": [
+      "Let’s find the cause.",
+      "علت مشکل را پیدا کنیم."
+    ],
+    "description": [
+      "Give us the machine details and symptoms to prepare a useful diagnostic conversation.",
+      "مشخصات دستگاه و نشانه‌های مشکل را بگویید تا بررسی را با اطلاعات کافی شروع کنیم."
+    ],
+    "fields": [
+      [
+        "machine",
+        "Machine type",
+        " ",
+        "text",
+        true
+      ],
+      [
+        "manufacturer",
+        "Manufacturer",
+        "",
+        "text",
+        true
+      ],
+      [
+        "model",
+        "Model / serial number",
+        " /  ",
+        "text"
+      ],
+      [
+        "description",
+        "Symptoms and error messages",
+        "   ",
+        "textarea",
+        true
+      ],
+      [
+        "location",
+        "Location",
+        " ",
+        "text",
+        true
+      ],
+      [
+        "urgency",
+        "Urgency / preferred service method",
+        " /   ",
+        "text"
+      ]
+    ]
+  },
+  "contact": {
+    "title": [
+      "Let’s start a conversation.",
+      "گفت‌وگو را شروع کنیم."
+    ],
+    "description": [
+      "Prepare an enquiry or consultation request. Scheduling needs confirmation.",
+      "درخواست یا موضوع مشاوره را آماده کنید. زمان جلسه باید تأیید شود."
+    ],
+    "fields": [
+      [
+        "project",
+        "Subject",
+        "",
+        "text",
+        true
+      ],
+      [
+        "description",
+        "Your message",
+        " ",
+        "textarea",
+        true
+      ],
+      [
+        "time",
+        "Preferred time and time zone",
+        "    ",
+        "text"
+      ]
+    ]
+  }
+}

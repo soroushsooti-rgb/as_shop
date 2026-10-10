@@ -1,0 +1,55 @@
+{
+  "doctype": "DocType",
+  "name": "AS Shop Cart Item",
+  "module": "AS Shop",
+  "istable": 1,
+  "editable_grid": 1,
+  "field_order": [
+    "product",
+    "product_code",
+    "product_title",
+    "quantity",
+    "unit_price",
+    "line_total"
+  ],
+  "fields": [
+    {
+      "fieldname": "product",
+      "fieldtype": "Link",
+      "label": "Product",
+      "options": "AS Shop Product",
+      "reqd": 1
+    },
+    {
+      "fieldname": "product_code",
+      "fieldtype": "Data",
+      "label": "Product Code",
+      "read_only": 1
+    },
+    {
+      "fieldname": "product_title",
+      "fieldtype": "Data",
+      "label": "Product Title",
+      "read_only": 1
+    },
+    {
+      "fieldname": "quantity",
+      "fieldtype": "Int",
+      "label": "Quantity",
+      "reqd": 1
+    },
+    {
+      "fieldname": "unit_price",
+      "fieldtype": "Currency",
+      "label": "Unit Price (Toman)",
+      "read_only": 1
+    },
+    {
+      "fieldname": "line_total",
+      "fieldtype": "Currency",
+      "label": "Line Total (Toman)",
+      "read_only": 1
+    }
+  ],
+  "permissions": []
+}

@@ -1,0 +1,566 @@
+{
+  "as/10-application/view-83": {
+    "file": "templates/as/10-application/view-83.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "view",
+    "slots": 4
+  },
+  "as/10-application/view-82": {
+    "file": "templates/as/10-application/view-82.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "view",
+    "slots": 6
+  },
+  "as/10-application/chatWidget-81": {
+    "file": "templates/as/10-application/chatWidget-81.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "chatWidget",
+    "slots": 7
+  },
+  "as/10-application/quickContact-80": {
+    "file": "templates/as/10-application/quickContact-80.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "quickContact",
+    "slots": 6
+  },
+  "as/10-application/view-79": {
+    "file": "templates/as/10-application/view-79.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "view",
+    "slots": 6
+  },
+  "as/10-application/contactFields-78": {
+    "file": "templates/as/10-application/contactFields-78.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "contactFields",
+    "slots": 10
+  },
+  "as/10-application/view-77": {
+    "file": "templates/as/10-application/view-77.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "view",
+    "slots": 11
+  },
+  "as/10-application/advancedMarkup-76": {
+    "file": "templates/as/10-application/advancedMarkup-76.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "advancedMarkup",
+    "slots": 12
+  },
+  "as/10-application/view-75": {
+    "file": "templates/as/10-application/view-75.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "view",
+    "slots": 9
+  },
+  "as/10-application/view-74": {
+    "file": "templates/as/10-application/view-74.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "view",
+    "slots": 5
+  },
+  "as/10-application/card-73": {
+    "file": "templates/as/10-application/card-73.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "card",
+    "slots": 3
+  },
+  "as/10-application/customerBundles-72": {
+    "file": "templates/as/10-application/customerBundles-72.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "customerBundles",
+    "slots": 5
+  },
+  "as/10-application/view-71": {
+    "file": "templates/as/10-application/view-71.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "view",
+    "slots": 8
+  },
+  "as/10-application/view-70": {
+    "file": "templates/as/10-application/view-70.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "view",
+    "slots": 17
+  },
+  "as/10-application/spotlight-69": {
+    "file": "templates/as/10-application/spotlight-69.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "spotlight",
+    "slots": 1
+  },
+  "as/10-application/carousel-68": {
+    "file": "templates/as/10-application/carousel-68.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "carousel",
+    "slots": 17
+  },
+  "as/10-application/carousel-67": {
+    "file": "templates/as/10-application/carousel-67.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "carousel",
+    "slots": 3
+  },
+  "as/10-application/hero-66": {
+    "file": "templates/as/10-application/hero-66.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "hero",
+    "slots": 1
+  },
+  "as/10-application/body-65": {
+    "file": "templates/as/10-application/body-65.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "body",
+    "slots": 4
+  },
+  "as/10-application/view-64": {
+    "file": "templates/as/10-application/view-64.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "view",
+    "slots": 0
+  },
+  "as/10-application/ecoBasketPage-62": {
+    "file": "templates/as/10-application/ecoBasketPage-62.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "ecoBasketPage",
+    "slots": 9
+  },
+  "as/10-application/ecoBasketPage-63": {
+    "file": "templates/as/10-application/ecoBasketPage-63.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "ecoBasketPage",
+    "slots": 0
+  },
+  "as/10-application/ecoBasketPage-61": {
+    "file": "templates/as/10-application/ecoBasketPage-61.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "ecoBasketPage",
+    "slots": 8
+  },
+  "as/10-application/view-60": {
+    "file": "templates/as/10-application/view-60.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "view",
+    "slots": 9
+  },
+  "as/10-application/view-59": {
+    "file": "templates/as/10-application/view-59.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "view",
+    "slots": 8
+  },
+  "as/10-application/view-58": {
+    "file": "templates/as/10-application/view-58.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "view",
+    "slots": 4
+  },
+  "as/10-application/ecoFastPetFormV4-57": {
+    "file": "templates/as/10-application/ecoFastPetFormV4-57.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "ecoFastPetFormV4",
+    "slots": 1
+  },
+  "as/10-application/ecoPetProcess-56": {
+    "file": "templates/as/10-application/ecoPetProcess-56.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "ecoPetProcess",
+    "slots": 1
+  },
+  "as/10-application/view-55": {
+    "file": "templates/as/10-application/view-55.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "view",
+    "slots": 3
+  },
+  "as/10-application/view-54": {
+    "file": "templates/as/10-application/view-54.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "view",
+    "slots": 4
+  },
+  "as/10-application/view-53": {
+    "file": "templates/as/10-application/view-53.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "view",
+    "slots": 7
+  },
+  "as/10-application/view-52": {
+    "file": "templates/as/10-application/view-52.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "view",
+    "slots": 4
+  },
+  "as/10-application/view-51": {
+    "file": "templates/as/10-application/view-51.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "view",
+    "slots": 7
+  },
+  "as/10-application/view-50": {
+    "file": "templates/as/10-application/view-50.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "view",
+    "slots": 6
+  },
+  "as/10-application/view-49": {
+    "file": "templates/as/10-application/view-49.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "view",
+    "slots": 4
+  },
+  "as/10-application/ecoFastPetForm-48": {
+    "file": "templates/as/10-application/ecoFastPetForm-48.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "ecoFastPetForm",
+    "slots": 0
+  },
+  "as/10-application/view-47": {
+    "file": "templates/as/10-application/view-47.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "view",
+    "slots": 8
+  },
+  "as/10-application/ecoShopComing-46": {
+    "file": "templates/as/10-application/ecoShopComing-46.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "ecoShopComing",
+    "slots": 2
+  },
+  "as/10-application/view-45": {
+    "file": "templates/as/10-application/view-45.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "view",
+    "slots": 1
+  },
+  "as/10-application/customRequest-44": {
+    "file": "templates/as/10-application/customRequest-44.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "customRequest",
+    "slots": 11
+  },
+  "as/10-application/partnersPage-43": {
+    "file": "templates/as/10-application/partnersPage-43.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "partnersPage",
+    "slots": 2
+  },
+  "as/10-application/furnitureShop-42": {
+    "file": "templates/as/10-application/furnitureShop-42.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "furnitureShop",
+    "slots": 3
+  },
+  "as/10-application/shopCategory-41": {
+    "file": "templates/as/10-application/shopCategory-41.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "shopCategory",
+    "slots": 1
+  },
+  "as/10-application/shopCategory-40": {
+    "file": "templates/as/10-application/shopCategory-40.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "shopCategory",
+    "slots": 7
+  },
+  "as/10-application/ecoExamples-39": {
+    "file": "templates/as/10-application/ecoExamples-39.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "ecoExamples",
+    "slots": 4
+  },
+  "as/10-application/ecoExamples-38": {
+    "file": "templates/as/10-application/ecoExamples-38.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "ecoExamples",
+    "slots": 1
+  },
+  "as/10-application/petDetail-37": {
+    "file": "templates/as/10-application/petDetail-37.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "petDetail",
+    "slots": 5
+  },
+  "as/10-application/petShop-36": {
+    "file": "templates/as/10-application/petShop-36.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "petShop",
+    "slots": 5
+  },
+  "as/10-application/petShop-35": {
+    "file": "templates/as/10-application/petShop-35.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "petShop",
+    "slots": 5
+  },
+  "as/10-application/shopLanding-34": {
+    "file": "templates/as/10-application/shopLanding-34.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "shopLanding",
+    "slots": 14
+  },
+  "as/10-application/nixa-33": {
+    "file": "templates/as/10-application/nixa-33.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "nixa",
+    "slots": 6
+  },
+  "as/10-application/comingSoon-32": {
+    "file": "templates/as/10-application/comingSoon-32.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "comingSoon",
+    "slots": 6
+  },
+  "as/10-application/home-31": {
+    "file": "templates/as/10-application/home-31.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "home",
+    "slots": 22
+  },
+  "as/10-application/ecosystemPartners-30": {
+    "file": "templates/as/10-application/ecosystemPartners-30.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "ecosystemPartners",
+    "slots": 8
+  },
+  "as/10-application/shahrniazPartner-29": {
+    "file": "templates/as/10-application/shahrniazPartner-29.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "shahrniazPartner",
+    "slots": 7
+  },
+  "as/10-application/architecturePartnerTeaser-28": {
+    "file": "templates/as/10-application/architecturePartnerTeaser-28.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "architecturePartnerTeaser",
+    "slots": 3
+  },
+  "as/10-application/home-27": {
+    "file": "templates/as/10-application/home-27.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "home",
+    "slots": 19
+  },
+  "as/10-application/methodTiles-26": {
+    "file": "templates/as/10-application/methodTiles-26.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "methodTiles",
+    "slots": 7
+  },
+  "as/10-application/learn-25": {
+    "file": "templates/as/10-application/learn-25.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "learn",
+    "slots": 28
+  },
+  "as/10-application/intake-24": {
+    "file": "templates/as/10-application/intake-24.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "intake",
+    "slots": 22
+  },
+  "as/10-application/quotes-23": {
+    "file": "templates/as/10-application/quotes-23.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "quotes",
+    "slots": 9
+  },
+  "as/10-application/cart-22": {
+    "file": "templates/as/10-application/cart-22.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "cart",
+    "slots": 9
+  },
+  "as/10-application/product-21": {
+    "file": "templates/as/10-application/product-21.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "product",
+    "slots": 19
+  },
+  "as/10-application/shop-20": {
+    "file": "templates/as/10-application/shop-20.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "shop",
+    "slots": 12
+  },
+  "as/10-application/shop-19": {
+    "file": "templates/as/10-application/shop-19.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "shop",
+    "slots": 7
+  },
+  "as/10-application/materialEstimateCard-18": {
+    "file": "templates/as/10-application/materialEstimateCard-18.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "materialEstimateCard",
+    "slots": 10
+  },
+  "as/10-application/price-17": {
+    "file": "templates/as/10-application/price-17.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "price",
+    "slots": 13
+  },
+  "as/10-application/config-16": {
+    "file": "templates/as/10-application/config-16.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "config",
+    "slots": 4
+  },
+  "as/10-application/config-15": {
+    "file": "templates/as/10-application/config-15.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "config",
+    "slots": 6
+  },
+  "as/10-application/config-14": {
+    "file": "templates/as/10-application/config-14.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "config",
+    "slots": 8
+  },
+  "as/10-application/workspace-13": {
+    "file": "templates/as/10-application/workspace-13.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "workspace",
+    "slots": 27
+  },
+  "as/10-application/slicerControls-12": {
+    "file": "templates/as/10-application/slicerControls-12.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "slicerControls",
+    "slots": 29
+  },
+  "as/10-application/layerSVG-11": {
+    "file": "templates/as/10-application/layerSVG-11.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "layerSVG",
+    "slots": 1
+  },
+  "as/10-application/infillSVG-10": {
+    "file": "templates/as/10-application/infillSVG-10.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "infillSVG",
+    "slots": 1
+  },
+  "as/10-application/processMotion-9": {
+    "file": "templates/as/10-application/processMotion-9.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "processMotion",
+    "slots": 18
+  },
+  "as/10-application/home-8": {
+    "file": "templates/as/10-application/home-8.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "home",
+    "slots": 22
+  },
+  "as/10-application/methodTiles-7": {
+    "file": "templates/as/10-application/methodTiles-7.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "methodTiles",
+    "slots": 7
+  },
+  "as/10-application/photoIntro-6": {
+    "file": "templates/as/10-application/photoIntro-6.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "photoIntro",
+    "slots": 7
+  },
+  "as/10-application/accountPage-5": {
+    "file": "templates/as/10-application/accountPage-5.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "accountPage",
+    "slots": 3
+  },
+  "as/10-application/accountPage-4": {
+    "file": "templates/as/10-application/accountPage-4.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "accountPage",
+    "slots": 7
+  },
+  "as/10-application/accountPage-3": {
+    "file": "templates/as/10-application/accountPage-3.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "accountPage",
+    "slots": 5
+  },
+  "as/10-application/accountPage-2": {
+    "file": "templates/as/10-application/accountPage-2.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "accountPage",
+    "slots": 9
+  },
+  "as/10-application/shell-1": {
+    "file": "templates/as/10-application/shell-1.html",
+    "javascript": "js/as/10-application.js",
+    "owner": "shell",
+    "slots": 7
+  },
+  "shop/add-button": {
+    "file": "templates/shop/add-button.html",
+    "javascript": "js/shop/catalog.js",
+    "owner": "add-button",
+    "slots": 3
+  },
+  "shop/basket-line": {
+    "file": "templates/shop/basket-line.html",
+    "javascript": "js/shop/catalog.js",
+    "owner": "basket-line",
+    "slots": 12
+  },
+  "shop/basket": {
+    "file": "templates/shop/basket.html",
+    "javascript": "js/shop/catalog.js",
+    "owner": "basket",
+    "slots": 6
+  },
+  "shop/card": {
+    "file": "templates/shop/card.html",
+    "javascript": "js/shop/catalog.js",
+    "owner": "card",
+    "slots": 12
+  },
+  "shop/catalog": {
+    "file": "templates/shop/catalog.html",
+    "javascript": "js/shop/catalog.js",
+    "owner": "catalog",
+    "slots": 8
+  },
+  "shop/category": {
+    "file": "templates/shop/category.html",
+    "javascript": "js/shop/catalog.js",
+    "owner": "category",
+    "slots": 2
+  },
+  "shop/detail": {
+    "file": "templates/shop/detail.html",
+    "javascript": "js/shop/catalog.js",
+    "owner": "detail",
+    "slots": 11
+  },
+  "shop/error": {
+    "file": "templates/shop/error.html",
+    "javascript": "js/shop/catalog.js",
+    "owner": "error",
+    "slots": 2
+  },
+  "shop/image": {
+    "file": "templates/shop/image.html",
+    "javascript": "js/shop/catalog.js",
+    "owner": "image",
+    "slots": 3
+  },
+  "shop/message": {
+    "file": "templates/shop/message.html",
+    "javascript": "js/shop/catalog.js",
+    "owner": "message",
+    "slots": 1
+  },
+  "shop/placeholder": {
+    "file": "templates/shop/placeholder.html",
+    "javascript": "js/shop/catalog.js",
+    "owner": "placeholder",
+    "slots": 1
+  }
+}

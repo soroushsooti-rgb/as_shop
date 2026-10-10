@@ -1,0 +1,80 @@
+{
+  "print": [
+    [
+      "Prepare",
+      "آماده‌سازی",
+      "Check model scale and whether the mesh is closed. A drawing helps identify critical dimensions.",
+      "مقیاس مدل و بسته‌بودن مش را بررسی کنید. نقشهٔ فنی به تعیین ابعاد حساس کمک می‌کند."
+    ],
+    [
+      "Slice",
+      "آماده‌سازی چاپ",
+      "Layer height, walls, infill and supports turn the model into printable paths.",
+      "ارتفاع لایه، دیواره‌ها، پرکننده و ساپورت، مسیرهای چاپ مدل را تعیین می‌کنند."
+    ],
+    [
+      "Build",
+      "ساخت",
+      "The nozzle deposits material layer by layer. Orientation affects layer bonding and performance.",
+      "نازل ماده را لایه‌به‌لایه می‌نشاند. جهت چاپ بر اتصال لایه‌ها و عملکرد قطعه اثر دارد."
+    ],
+    [
+      "Finish",
+      "پرداخت",
+      "Remove supports and apply the agreed finish before checking fit and dimensions.",
+      "ساپورت‌ها را بردارید و پرداخت توافق‌شده را انجام دهید؛ سپس انطباق و ابعاد را بررسی کنید."
+    ]
+  ],
+  "laser": [
+    [
+      "Prepare",
+      "آماده‌سازی",
+      "Use clear contours in a known unit. Remove duplicate paths and separate engraving from cutting.",
+      "مسیرهای واضح با واحد مشخص تهیه کنید. خطوط تکراری را حذف و حکاکی را از برش جدا کنید."
+    ],
+    [
+      "Choose",
+      "انتخاب",
+      "Define the material, alloy, thickness and finish together. Availability needs confirmation.",
+      "جنس، آلیاژ، ضخامت و پرداخت را کنار هم مشخص کنید. موجودی باید تأیید شود."
+    ],
+    [
+      "Cut",
+      "برش",
+      "The laser follows the toolpath. Kerf, lead-ins, nesting and pierces affect the process.",
+      "لیزر مسیر برش را دنبال می‌کند. عرض برش، نقطهٔ ورود، چیدمان قطعات و سوراخ‌کاری اولیه بر فرایند اثر دارند."
+    ],
+    [
+      "Inspect",
+      "بازرسی",
+      "Check cut edges and critical dimensions. Previewed curve lengths are approximations, not final CAM data.",
+      "لبه‌های برش و ابعاد حساس را بررسی کنید. طول منحنی‌ها در پیش‌نمایش تقریبی است و دادهٔ نهایی CAM نیست."
+    ]
+  ],
+  "cnc": [
+    [
+      "Define",
+      "تعریف",
+      "A solid CAD model and a drawing clarify tolerances, threads and finish.",
+      "مدل CAD حجمی و نقشهٔ فنی، تلرانس، رزوه و پرداخت را مشخص می‌کنند."
+    ],
+    [
+      "Review",
+      "بازبینی",
+      "Check tool access, internal corners, wall thickness and workholding before quoting.",
+      "پیش از قیمت‌گذاری، دسترسی ابزار، گوشه‌های داخلی، ضخامت دیواره و نگهداری قطعه را بررسی کنید."
+    ],
+    [
+      "Machine",
+      "دستگاه",
+      "CAM sets toolpaths for the material, machine and setup. The tool removes stock in controlled passes.",
+      "نرم‌افزار CAM مسیر ابزار را متناسب با ماده، دستگاه و تنظیمات تعیین می‌کند. ابزار ماده را در گذرهای کنترل‌شده برمی‌دارد."
+    ],
+    [
+      "Measure",
+      "اندازه‌گیری",
+      "Verify critical features and the required inspection record before acceptance.",
+      "پیش از پذیرش، ویژگی‌های حساس و گزارش بازرسی موردنیاز را بررسی کنید."
+    ]
+  ]
+}

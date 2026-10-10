@@ -1,0 +1,184 @@
+/* مسئولیت این فایل: سبک نمایش زبان و متن‌های فارسی. */
+/* SHN / as / language. Original cascade position: 2. */
+@font-face {
+  font-family: Vazirmatn;
+  src: url("/assets/as_shop/media/fonts/7f3c44f0a0b45cd74851.ttf") format("truetype");
+  font-weight: 100 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: Vazirmatn;
+  src: url("/assets/as_shop/media/fonts/489c29f4ba685a8f4aeb.ttf") format("truetype");
+  font-weight: 600 900;
+  font-display: swap;
+}
+/* Geometry stays LTR in both languages. RTL belongs only to text runs. */
+html,
+body {
+  direction: ltr;
+}
+html[lang="fa"] body {
+  font-family: Vazirmatn, Tahoma, sans-serif;
+}
+html[lang="fa"]
+  :is(h1, h2, h3, h4, p, small, .eyebrow, .eco-eyebrow, button, a, label, input, select, textarea) {
+  letter-spacing: 0;
+}
+html[lang="fa"] :is(h1, h2, h3, h4) {
+  line-height: 1.4;
+}
+html[lang="fa"] :is(.as-home-copy h1, .as-home-copy h2) {
+  font-size: clamp(48px, 6.4vw, 96px);
+  line-height: 1.3;
+  max-width: 790px;
+  margin: 22px 0 28px;
+}
+html[lang="fa"] .eco-shop h1 {
+  font-size: clamp(42px, 6vw, 92px);
+  line-height: 1.35;
+}
+html[lang="fa"] .eco-shop h2 {
+  line-height: 1.4;
+}
+html[lang="fa"] :is(.ux-hero h1, .reference-split h1, .cinema-hero h1) {
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+html[lang="fa"]
+  :is(
+    .header-actions,
+    .header-controls,
+    .nav,
+    .eyebrow,
+    .eco-eyebrow,
+    .row-meta,
+    .as-home-copy small
+  ) {
+  font-family: Vazirmatn, Tahoma, sans-serif;
+  letter-spacing: 0;
+}
+.localized-run {
+  direction: rtl;
+  unicode-bidi: isolate;
+  font-family: Vazirmatn, Tahoma, sans-serif;
+  letter-spacing: 0;
+}
+.language-picker {
+  direction: ltr !important;
+  flex: 0 0 auto;
+  font:
+    13px/1.5 Vazirmatn,
+    Arial,
+    sans-serif !important;
+  letter-spacing: 0 !important;
+  border: 1px solid #788375 !important;
+  border-radius: 4px !important;
+  padding: 8px 6px !important;
+  min-height: 40px;
+  min-width: 78px;
+  background: #182019 !important;
+  color: #f4f6ed !important;
+  cursor: pointer;
+}
+.language-picker option {
+  color: #f4f6ed;
+  background: #182019;
+}
+.language-picker:focus-visible {
+  outline: 2px solid #d8ed85;
+  outline-offset: 3px;
+}
+input[type="email"],
+input[type="url"],
+input[type="tel"],
+input[type="number"],
+.price,
+.as-wordmark,
+.sn-as-mark,
+canvas,
+svg {
+  direction: ltr;
+}
+input:not([type]),
+input[type="text"],
+input[type="search"],
+textarea {
+  unicode-bidi: plaintext;
+}
+html[lang="fa"] input:not([type]),
+html[lang="fa"] input[type="text"],
+html[lang="fa"] input[type="search"],
+html[lang="fa"] textarea {
+  direction: rtl;
+  text-align: left;
+}
+/* Controls and descriptions need visible boundaries on the dark themes. */
+.work-layout :is(input, select, textarea),
+.account-page :is(input, select, textarea),
+.intake-form :is(input, select, textarea) {
+  border-color: #64725f;
+}
+.work-layout .material-option {
+  border-color: #63735b;
+}
+.experience-mode .sn-object-private-link {
+  color: #d2e3cf;
+  border-color: #7e9579;
+}
+.experience-mode .sn-study-heading p {
+  color: #b8c1b6;
+}
+.experience-mode .sn-study-heading a {
+  color: #c9e4c7;
+}
+.experience-mode .sn-study-card {
+  color: #202820;
+}
+.sn-gate-kicker {
+  color: #596648;
+}
+.eco-shop .eco-eyebrow {
+  color: #43563c;
+}
+.eco-shop input::placeholder,
+.eco-shop textarea::placeholder {
+  color: #626e60;
+  opacity: 1;
+}
+.eco-shop input[type="file"] {
+  color-scheme: light;
+}
+html[lang="fa"] .sn-object-studies .sn-study-card:after {
+  content: "به‌زودی";
+  letter-spacing: 0;
+  font-family: Vazirmatn, Tahoma, sans-serif;
+}
+.experience-mode .config-controls input,
+.experience-mode .config-controls textarea,
+.experience-mode .config-controls select {
+  background: #171d18;
+  color: #f1f3ec;
+  border-color: #697466;
+}
+.experience-mode .config-controls input::placeholder,
+.experience-mode .config-controls textarea::placeholder {
+  color: #b5bdb3;
+  opacity: 1;
+}
+
+@media (max-width: 700px) {
+  html[lang="fa"] :is(.as-home-copy h1, .as-home-copy h2) {
+    font-size: clamp(37px, 9.5vw, 62px);
+    line-height: 1.3;
+  }
+  .language-picker {
+    min-width: 66px;
+    padding: 7px 3px !important;
+    font-size: 12px !important;
+  }
+  .site-header,
+  .site-header .header-actions,
+  .header-controls {
+    gap: 6px;
+  }
+}
