@@ -26,6 +26,10 @@ class ASShopProduct(Document):
             frappe.throw(_("Product Code must contain lowercase English letters, numbers and hyphens."))
         if not math.isfinite(flt(self.price)) or flt(self.price) < 0:
             frappe.throw(_("Price must be a finite non-negative amount in Toman."))
+        for field in ("price_2", "price_3", "price_4_plus"):
+            value = flt(self.get(field))
+            if not math.isfinite(value) or value < 0:
+                frappe.throw(_("Quantity prices must be finite non-negative amounts in Toman."))
         previous = self.get_doc_before_save()
         if previous and self.product_code != previous.product_code:
             frappe.throw(_("Product Code cannot change after creation."))

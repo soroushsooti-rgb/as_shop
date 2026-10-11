@@ -4,6 +4,7 @@ import re
 import secrets
 import frappe
 from frappe.utils import cint
+from as_shop.pricing import unit_price
 
 TOKEN_RE = re.compile(r"^[A-Za-z0-9_-]{48}$")
 
@@ -20,12 +21,13 @@ def get_owned_cart(token, lock=False):
 
 def payload(doc):
     items=[]
+    basket_quantity=sum(cint(row.quantity) for row in doc.items)
     for row in doc.items:
-        p=frappe.db.get_value("AS Shop Product", row.product, ["product_code","title","title_en","cover_image","stock_qty","manual_out_of_stock","show_on_website","price"], as_dict=True)
+        p=frappe.db.get_value("AS Shop Product", row.product, ["product_code","title","title_en","cover_image","stock_qty","manual_out_of_stock","show_on_website","price","price_2","price_3","price_4_plus"], as_dict=True)
         qty=cint(row.quantity)
         available=bool(p and p.show_on_website and not p.manual_out_of_stock and cint(p.stock_qty)>=qty)
-        price=float(p.price) if p and p.show_on_website else 0
-        items.append({"product_code":row.product_code,"title":p.title if p and p.show_on_website else row.product_title,"title_en":p.title_en if p and p.show_on_website else "", "quantity":qty,"unit_price":price,"line_total":price*qty if available else 0,"available":available,"product_available":bool(p and p.show_on_website and not p.manual_out_of_stock and cint(p.stock_qty)>0),"published":bool(p and p.show_on_website),"stock_qty":max(0,cint(p.stock_qty)) if p and p.show_on_website else 0})
+        price=unit_price(p, basket_quantity) if p and p.show_on_website else 0
+        items.append({"product_code":row.product_code,"title":p.title if p and p.show_on_website else row.product_title,"title_en":p.title_en if p and p.show_on_website else "", "quantity":qty,"unit_price":price,"price":float(p.price) if p and p.show_on_website else 0,"price_2":float(p.price_2 or 0) if p and p.show_on_website else 0,"price_3":float(p.price_3 or 0) if p and p.show_on_website else 0,"price_4_plus":float(p.price_4_plus or 0) if p and p.show_on_website else 0,"line_total":price*qty if available else 0,"available":available,"product_available":bool(p and p.show_on_website and not p.manual_out_of_stock and cint(p.stock_qty)>0),"published":bool(p and p.show_on_website),"stock_qty":max(0,cint(p.stock_qty)) if p and p.show_on_website else 0})
     return {"name":doc.name,"status":doc.status,"currency":"Toman","items":items,"total_qty":sum(i["quantity"] for i in items),"total_amount":sum(i["line_total"] for i in items)}
 
 @frappe.whitelist(allow_guest=True, methods=["POST"])

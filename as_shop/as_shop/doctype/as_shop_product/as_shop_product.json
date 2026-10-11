@@ -16,6 +16,9 @@
     "description_en",
     "pricing_section",
     "price",
+    "price_2",
+    "price_3",
+    "price_4_plus",
     "show_on_website",
     "manual_out_of_stock",
     "stock_qty",
@@ -95,7 +98,28 @@
       "reqd": 1,
       "precision": "0",
       "in_list_view": 1,
-      "description": "قیمت یک عدد، به تومان؛ قیمت بسته قدیمی در این کاتالوگ اعمال نمی‌شود."
+      "description": "قیمت هر واحد وقتی مجموع تعداد سبد یک عدد است، به تومان."
+    },
+    {
+      "fieldname": "price_2",
+      "fieldtype": "Currency",
+      "label": "Unit Price at Basket Quantity 2 (Toman)",
+      "precision": "0",
+      "description": "قیمت هر واحد از این محصول بر اساس مجموع تعداد تمام محصولات داخل سبد؛ صفر یا خالی یعنی قیمت اصلی."
+    },
+    {
+      "fieldname": "price_3",
+      "fieldtype": "Currency",
+      "label": "Unit Price at Basket Quantity 3 (Toman)",
+      "precision": "0",
+      "description": "قیمت هر واحد از این محصول بر اساس مجموع تعداد تمام محصولات داخل سبد؛ صفر یا خالی یعنی قیمت اصلی."
+    },
+    {
+      "fieldname": "price_4_plus",
+      "fieldtype": "Currency",
+      "label": "Unit Price at Basket Quantity 4+ (Toman)",
+      "precision": "0",
+      "description": "قیمت هر واحد از این محصول بر اساس مجموع تعداد تمام محصولات داخل سبد؛ صفر یا خالی یعنی قیمت اصلی."
     },
     {
       "fieldname": "show_on_website",

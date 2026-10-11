@@ -8,7 +8,7 @@ from werkzeug.wrappers import Response
 
 PUBLIC_FIELDS = [
     "name", "product_code", "title", "title_en", "category", "caption", "caption_en",
-    "description", "description_en", "price", "cover_image", "stock_qty", "manual_out_of_stock",
+    "description", "description_en", "price", "price_2", "price_3", "price_4_plus", "cover_image", "stock_qty", "manual_out_of_stock",
 ]
 
 
@@ -27,7 +27,8 @@ def catalogue_data():
     for row in images:
         gallery.setdefault(row.pop("parent"), []).append(dict(row))
     for product in products:
-        product["price"] = flt(product.price)
+        for field in ("price", "price_2", "price_3", "price_4_plus"):
+            product[field] = flt(product.get(field))
         product["stock_qty"] = max(0, cint(product.stock_qty))
         product["available"] = bool(product.stock_qty > 0 and not cint(product.manual_out_of_stock))
         product["images"] = gallery.get(product.name, [])

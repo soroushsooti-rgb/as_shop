@@ -176,7 +176,7 @@
           .map(([url, en, fa]) => a(url, t(en, fa)))
           .join(""),
       ),
-      window.SHN_TEMPLATES.text(a("/account", t("Sign in", "ورود"), "account-link")),
+      window.SHN_TEMPLATES.text(a("/account", t("Sign in", "ورود"), "account-link") + a("/profile", t("Profile", "پروفایل"), "account-link")),
       window.SHN_TEMPLATES.text(
         path.startsWith("/shop") || path === "/nixa"
           ? a("/shop/pets", "PET KEYCHAINS", "button primary header-quote")

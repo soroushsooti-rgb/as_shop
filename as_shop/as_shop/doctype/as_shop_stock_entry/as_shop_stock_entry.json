@@ -12,7 +12,8 @@
     "result_section",
     "stock_change",
     "stock_before",
-    "stock_after"
+    "stock_after",
+    "amended_from"
   ],
   "fields": [
     {
@@ -69,6 +70,14 @@
       "fieldtype": "Int",
       "label": "Stock After",
       "read_only": 1
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "options": "AS Shop Stock Entry",
+      "read_only": 1,
+      "no_copy": 1
     }
   ],
   "permissions": [

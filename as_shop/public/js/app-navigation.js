@@ -11,8 +11,10 @@
   /** Keep legacy shop links on AS Shop and industrial links on AS Industries. */
   function destination(site, route) {
     const path = route.split("?")[0];
+    // Both AS websites use the existing Industries account and Frappe User records.
+    if ((site === "shop" || site === "as") && /^\/(account|profile)(\/|$)/.test(path)) return "as";
     if (site === "as" && /^\/(shop|nixa)(\/|$)/.test(path)) return "shop";
-    // Cart, account and receipt state belong to the website that created them.
+    // Cart and receipt state belong to the website that created them.
     if (site === "shop" && path !== "/" && !/^\/(shop|nixa|partners|account|contact|consultation|about|cart|quotes|request-sent)(\/|$)/.test(path)) return "as";
     return site;
   }

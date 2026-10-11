@@ -16,6 +16,7 @@
   let products = null;
   let pending = null;
   let failed = false;
+  let loadedAt = 0;
   let currentPath = "/shop";
   let cart = readCart();
   let cartToken = readToken();
@@ -29,6 +30,9 @@
   const title = p => translated(p, "title");
   const find = id => products?.find(p => p.product_code === id);
   const categoryTitle = id => text(...(categories[id] || categories.other));
+
+  const basketQuantity = () => Object.values(cart).reduce((sum, qty) => sum + qty, 0);
+  const unitPrice = (p, qty) => Number(p[qty >= 4 ? "price_4_plus" : qty === 3 ? "price_3" : qty === 2 ? "price_2" : "price"]) || Number(p.price);
 
   /** The cart stores quantities, never trusted prices or stock values. */
   function readCart() {
@@ -75,7 +79,7 @@
     cart = serverItems(server);
     for (const item of server.items || []) {
       const p = find(item.product_code);
-      if (p) { p.price = item.unit_price; p.stock_qty = item.stock_qty; p.available = item.product_available ?? item.available; }
+      if (p) { for (const field of ["price","price_2","price_3","price_4_plus"]) p[field] = item[field] ?? p[field]; p.stock_qty = item.stock_qty; p.available = item.product_available ?? item.available; }
     }
     saveCart();
   }
@@ -97,7 +101,7 @@
   }
   function syncItem(productCode, quantity, additive = false) {
     cartSync = cartSync.then(async () => {
-      if (!cartToken) throw new Error("Cart is not ready");
+      if (!cartToken) await fetchCart(false);
       // Calculate additions inside the queue, after the preceding server response.
       // Never announce or store a successful purchase before the server accepts it.
       const nextQuantity = additive ? (cart[productCode] || 0) + quantity : quantity;
@@ -124,7 +128,7 @@
     const count = Object.values(cart).reduce((sum, qty) => sum + qty, 0);
     const total = Object.entries(cart).reduce((sum, [id, qty]) => {
       const p = find(id);
-      return sum + (p?.available && qty <= p.stock_qty ? p.price * qty : 0);
+      return sum + (p?.available && qty <= p.stock_qty ? unitPrice(p, basketQuantity()) * qty : 0);
     }, 0);
     toast.innerHTML = `<strong>${escape(title(product))} ${text("added", "به سبد اضافه شد")}</strong><span>${escape(number(count))} ${text("piece(s)", "عدد")} · ${escape(money(total))}</span><a href="#/shop/basket">${text("View basket ↗", "مشاهده سبد ↗")}</a>`;
     toast.classList.add("show");
@@ -197,12 +201,12 @@
     const lines = Object.entries(cart).map(([id, qty]) => {
       const p = find(id);
       const available = p?.available && qty <= p.stock_qty;
-      const amount = available ? p.price * qty : 0;
+      const amount = available ? unitPrice(p, basketQuantity()) * qty : 0;
       total += amount;
       return template("basket-line", [
         escape(id), escape(p ? title(p) : text("Product removed from catalogue", "محصول از کاتالوگ حذف شده")),
         p ? photo(p, p.cover_image || p.images[0]?.image) : "",
-        escape(p ? money(p.price) : "—"), number(qty), escape(id), qty,
+        escape(p ? money(unitPrice(p, basketQuantity())) : "—"), number(qty), escape(id), qty,
         p?.available ? p.stock_qty : 0, p?.available ? "" : "disabled",
         escape(available ? money(amount) : text("Unavailable — remove or reduce quantity", "غیرقابل خرید؛ حذف کنید یا تعداد را کاهش دهید")),
         escape(id), escape(text("Remove", "حذف")),
@@ -228,6 +232,7 @@
       .then(payload => {
         if (!Array.isArray(payload.message?.products)) throw new Error("Invalid catalogue");
         products = payload.message.products;
+        loadedAt = Date.now();
         failed = false;
         return fetchCart();
       })
@@ -246,6 +251,7 @@
   /** Called by the original shell router, keeping its header, footer and language. */
   function mount(path, container) {
     currentPath = path;
+    if (products !== null && Date.now() - loadedAt > 15000 && !pending) load();
     document.title = "AS Shop";
     if (products === null) {
       container.innerHTML = failed
@@ -271,6 +277,8 @@
 
     if(products!==null && ['/','/shop'].includes(currentPath)) {
       container.innerHTML=skin.landing();
+      container.querySelectorAll('[data-bundle-target] strong').forEach(el=>el.textContent=text('Price calculated in your basket','قیمت در سبد محاسبه می‌شود'));
+      container.querySelectorAll('[data-bundle-target] small').forEach(el=>{if(/Toman|تومان/.test(el.textContent))el.textContent=text('Quantity prices vary by product','قیمت تعدادی هر محصول متفاوت است');});
       container.querySelectorAll('[data-bundle-target]').forEach(button=>button.onclick=()=>{location.hash='#/shop/pets';});
       return;
     }
@@ -285,7 +293,13 @@
         const price=container.querySelector('#ecoTotal,.eco-detail-price');if(price)price.textContent=money(p.price);
         const status=container.querySelector('.eco-tier-explain');if(status)status.textContent=availability(p);
         const button=container.querySelector('[data-eco-add]');if(button){button.removeAttribute('data-eco-add');button.dataset.shopAdd=id;button.disabled=!p.available;if(!p.available)button.textContent=text('Out of stock','ناموجود');}
-        const qty=container.querySelector('#ecoQty');if(qty){qty.max=p.stock_qty;qty.disabled=!p.available;}
+        const qty=container.querySelector('#ecoQty');if(qty){qty.max=Math.min(10000,Math.max(0,p.stock_qty-(cart[id]||0)));qty.disabled=!p.available||Number(qty.max)<1;qty.value=qty.disabled?0:1;}
+        container.querySelectorAll('#ecoQtyMinus,#ecoQtyPlus').forEach(b=>b.disabled=!!qty?.disabled);
+        if(button&&qty?.disabled){button.disabled=true;if(p.available)button.textContent=text('Stock limit reached','به سقف موجودی رسیدید');}
+        const tiers=document.createElement('p');tiers.className='eco-quantity-prices';
+        tiers.textContent=[1,2,3,4].map(n=>number(n)+(n===4?'+':'')+' '+text('pieces in basket: ','عدد در سبد: ')+money(unitPrice(p,n))+' '+text('each','هر عدد')).join(' · ');
+        qty?.closest('.eco-qty-row')?.before(tiers);
+        updateDetailQuantity(container);
         const gallery=container.querySelector('.eco-detail > div:first-child');
         if(gallery){
           const back=gallery.querySelector('a.back-link')?.outerHTML||'';
@@ -342,6 +356,15 @@
   }
 
   /** All quantity changes use the latest stock snapshot, never a static price. */
+  function updateDetailQuantity(container) {
+    const qty=container.querySelector('#ecoQty');
+    const p=find(decodeURIComponent(currentPath.split('/').pop()));
+    if(!qty||!p)return;
+    const count=qty.disabled?0:Math.min(Number(qty.max),Math.max(1,Math.floor(Number(qty.value)||1)));
+    qty.value=count;
+    const total=container.querySelector('#ecoTotal');
+    if(total)total.textContent=money(unitPrice(p,count+basketQuantity())*count);
+  }
   function bind(container) {
     container.onclick = event => {
       const add = event.target.closest("[data-shop-add], .eco-card-add[data-eco-add], .eco-detail-add[data-eco-add]");
@@ -349,7 +372,8 @@
       if (add) {
         event.preventDefault();
         const p = find(add.dataset.shopAdd || add.dataset.ecoAdd);
-        if (!p?.available || (cart[p.product_code] || 0) >= p.stock_qty) return;
+        if (add.disabled || !p?.available || (cart[p.product_code] || 0) >= p.stock_qty) return;
+        updateDetailQuantity(container);
         const requested=Math.max(1,Math.floor(Number(container.querySelector('#ecoQty')?.value)||1));
         syncItem(p.product_code, requested, true).then(saved => {
           mount(currentPath, container);
@@ -358,8 +382,7 @@
       } else if (event.target.closest('#ecoQtyMinus,#ecoQtyPlus')) {
         const qty=container.querySelector('#ecoQty');if(!qty||qty.disabled)return;
         qty.value=Math.min(Number(qty.max),Math.max(1,Number(qty.value)+(event.target.closest('#ecoQtyPlus')?1:-1)));
-        const product=find(decodeURIComponent(currentPath.split('/').pop()));
-        const total=container.querySelector('#ecoTotal');if(product&&total)total.textContent=money(product.price*Number(qty.value));
+        updateDetailQuantity(container);
       } else if (remove) {
         const id=remove.dataset.shopRemove; syncItem(id, 0).then(() => mount(currentPath, container));
       } else if (event.target.closest("[data-shop-retry]")) {
@@ -367,11 +390,13 @@
       }
     };
     container.oninput = event => {
+      if(event.target.matches("#ecoQty")){updateDetailQuantity(container);return;}
       if (!event.target.matches("[data-shop-search]")) return;
       const query = event.target.value.toLowerCase().trim();
       container.querySelectorAll("[data-shop-search-text]").forEach(card => { card.hidden = !card.dataset.shopSearchText.includes(query); });
     };
     container.onchange = event => {
+      if(event.target.matches("#ecoQty")){updateDetailQuantity(container);return;}
       const input = event.target.closest("[data-shop-quantity]");
       if (!input) return;
       const p = find(input.dataset.shopQuantity);
@@ -383,5 +408,6 @@
 
   window.AS_SHOP_BACKEND = { owns, mount, reload() { products = null; failed = false; load(); this.refresh?.(); }, clearCart() { cart = Object.create(null); saveCart(); return clearServerCart().then(() => mount(currentPath, document.querySelector("#app"))); } };
   // Returning from Desk reloads product changes, publication flags and inventory.
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden)window.AS_SHOP_BACKEND.reload();});
   window.addEventListener("focus", () => { cartToken = readToken() || cartToken; window.AS_SHOP_BACKEND.reload(); });
 })();
