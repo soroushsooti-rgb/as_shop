@@ -39,6 +39,9 @@ def catalogue_data():
 @frappe.whitelist(allow_guest=True, methods=["GET"])
 def get_catalog():
     """Return published products without caching deleted or hidden products."""
+    if frappe.db.exists("DocType", "AS Shop Order"):
+        from as_shop.orders import expire_reservations
+        expire_reservations()
     response = Response(
         json.dumps({"message": catalogue_data()}, ensure_ascii=False), mimetype="application/json"
     )

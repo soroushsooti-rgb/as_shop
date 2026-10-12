@@ -1,0 +1,96 @@
+{
+  "doctype": "DocType",
+  "name": "AS Shop Payment Settings",
+  "module": "AS Shop",
+  "custom": 0,
+  "engine": "InnoDB",
+  "field_order": [
+    "enabled",
+    "provider",
+    "merchant_id",
+    "sandbox",
+    "public_shop_url",
+    "customer_website_url",
+    "shipping_fee",
+    "shipping_description",
+    "reservation_minutes",
+    "help_note"
+  ],
+  "fields": [
+    {
+      "fieldname": "enabled",
+      "fieldtype": "Check",
+      "label": "Enable Online Payment"
+    },
+    {
+      "fieldname": "provider",
+      "fieldtype": "Select",
+      "label": "Iranian Gateway",
+      "options": "Zarinpal\nZibal",
+      "default": "Zarinpal"
+    },
+    {
+      "fieldname": "merchant_id",
+      "fieldtype": "Password",
+      "label": "Merchant Credential",
+      "permlevel": 1
+    },
+    {
+      "fieldname": "sandbox",
+      "fieldtype": "Check",
+      "label": "Sandbox / Test Payment",
+      "default": 0
+    },
+    {
+      "fieldname": "public_shop_url",
+      "fieldtype": "Data",
+      "label": "Public Shop URL"
+    },
+    {
+      "fieldname": "customer_website_url",
+      "fieldtype": "Data",
+      "label": "AS Industries Website URL"
+    },
+    {
+      "fieldname": "shipping_fee",
+      "fieldtype": "Currency",
+      "label": "Shipping Fee (Toman)",
+      "default": 0
+    },
+    {
+      "fieldname": "shipping_description",
+      "fieldtype": "Small Text",
+      "label": "Shipping Description"
+    },
+    {
+      "fieldname": "reservation_minutes",
+      "fieldtype": "Int",
+      "label": "Payment Reservation (Minutes)",
+      "default": 20
+    },
+    {
+      "fieldname": "help_note",
+      "fieldtype": "HTML",
+      "label": "Help",
+      "options": "Merchant credentials stay encrypted on the server. Live callbacks require a public HTTPS Shop URL."
+    }
+  ],
+  "issingle": 1,
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1
+    },
+    {
+      "role": "System Manager",
+      "permlevel": 1,
+      "read": 1,
+      "write": 1
+    },
+    {
+      "role": "AS Shop Manager",
+      "read": 1
+    }
+  ]
+}

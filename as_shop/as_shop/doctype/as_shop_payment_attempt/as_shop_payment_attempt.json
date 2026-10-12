@@ -1,0 +1,132 @@
+{
+  "doctype": "DocType",
+  "name": "AS Shop Payment Attempt",
+  "module": "AS Shop",
+  "custom": 0,
+  "engine": "InnoDB",
+  "field_order": [
+    "order",
+    "provider",
+    "sandbox",
+    "status",
+    "amount_rial",
+    "authority",
+    "reference_id",
+    "callback_token_hash",
+    "gateway_key",
+    "redirect_url",
+    "verified_at",
+    "gateway_code"
+  ],
+  "fields": [
+    {
+      "fieldname": "order",
+      "fieldtype": "Link",
+      "label": "Order",
+      "options": "AS Shop Order",
+      "read_only": 1,
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "provider",
+      "fieldtype": "Select",
+      "label": "Provider",
+      "options": "Zarinpal\nZibal",
+      "read_only": 1
+    },
+    {
+      "fieldname": "sandbox",
+      "fieldtype": "Check",
+      "label": "Sandbox",
+      "read_only": 1
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Initiating\nPending\nPaid\nFailed\nReview",
+      "read_only": 1,
+      "default": "Initiating",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "amount_rial",
+      "fieldtype": "Currency",
+      "label": "Amount (Rial)",
+      "read_only": 1
+    },
+    {
+      "fieldname": "authority",
+      "fieldtype": "Data",
+      "label": "Authority / Track ID",
+      "read_only": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "reference_id",
+      "fieldtype": "Data",
+      "label": "Reference",
+      "read_only": 1
+    },
+    {
+      "fieldname": "callback_token_hash",
+      "fieldtype": "Data",
+      "label": "Callback Token Hash",
+      "read_only": 1,
+      "hidden": 1
+    },
+    {
+      "fieldname": "gateway_key",
+      "fieldtype": "Password",
+      "label": "Gateway Credential",
+      "read_only": 1,
+      "hidden": 1,
+      "permlevel": 1
+    },
+    {
+      "fieldname": "redirect_url",
+      "fieldtype": "Data",
+      "label": "Gateway URL",
+      "read_only": 1,
+      "hidden": 1
+    },
+    {
+      "fieldname": "verified_at",
+      "fieldtype": "Datetime",
+      "label": "Verified At",
+      "read_only": 1
+    },
+    {
+      "fieldname": "gateway_code",
+      "fieldtype": "Data",
+      "label": "Gateway Code",
+      "read_only": 1
+    }
+  ],
+  "autoname": "hash",
+  "track_changes": 1,
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 0,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    },
+    {
+      "role": "AS Shop Manager",
+      "read": 1,
+      "write": 0,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    },
+    {
+      "role": "System Manager",
+      "permlevel": 1,
+      "read": 1
+    }
+  ]
+}

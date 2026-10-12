@@ -39,5 +39,14 @@ class ASShopStockEntry(Document):
 
     def on_cancel(self):
         """Reverse the movement; reject reversal if subsequent issues used stock."""
+        # Preserve earlier reservation movements even after a late payment allocates stock again.
+        if frappe.db.exists("DocType", "AS Shop Order") and str(self.notes or "").startswith("Order "):
+            order_name = str(self.notes).split(" ", 2)[1]
+            if frappe.db.exists("AS Shop Order", order_name):
+                frappe.throw(_("Order stock movements must be managed through the order."))
+        if frappe.db.exists("DocType", "AS Shop Order Item"):
+            for field in ("reservation_entry", "release_entry"):
+                if frappe.db.exists("AS Shop Order Item", {field: self.name}):
+                    frappe.throw(_("Order stock movements must be managed through the order."))
         self.apply_change(-cint(self.stock_change))
 

@@ -1,0 +1,79 @@
+{
+  "doctype": "DocType",
+  "name": "AS Shop Order Item",
+  "module": "AS Shop",
+  "custom": 0,
+  "engine": "InnoDB",
+  "field_order": [
+    "product",
+    "product_code",
+    "title",
+    "title_en",
+    "image",
+    "quantity",
+    "unit_price",
+    "line_total",
+    "reservation_entry",
+    "release_entry"
+  ],
+  "fields": [
+    {
+      "fieldname": "product",
+      "fieldtype": "Link",
+      "label": "Product",
+      "options": "AS Shop Product",
+      "reqd": 1
+    },
+    {
+      "fieldname": "product_code",
+      "fieldtype": "Data",
+      "label": "Product Code"
+    },
+    {
+      "fieldname": "title",
+      "fieldtype": "Data",
+      "label": "Title"
+    },
+    {
+      "fieldname": "title_en",
+      "fieldtype": "Data",
+      "label": "English Title"
+    },
+    {
+      "fieldname": "image",
+      "fieldtype": "Data",
+      "label": "Image"
+    },
+    {
+      "fieldname": "quantity",
+      "fieldtype": "Int",
+      "label": "Quantity",
+      "reqd": 1
+    },
+    {
+      "fieldname": "unit_price",
+      "fieldtype": "Currency",
+      "label": "Unit Price (Toman)"
+    },
+    {
+      "fieldname": "line_total",
+      "fieldtype": "Currency",
+      "label": "Line Total (Toman)"
+    },
+    {
+      "fieldname": "reservation_entry",
+      "fieldtype": "Link",
+      "label": "Reservation Entry",
+      "options": "AS Shop Stock Entry",
+      "hidden": 1
+    },
+    {
+      "fieldname": "release_entry",
+      "fieldtype": "Link",
+      "label": "Release Entry",
+      "options": "AS Shop Stock Entry",
+      "hidden": 1
+    }
+  ],
+  "istable": 1
+}

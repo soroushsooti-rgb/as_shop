@@ -5692,6 +5692,7 @@
   };
   /** chatWidget: application feature. Keep related handlers in this module. */
   function chatWidget() {
+    if (window.AS_TICKET_LINK) { window.AS_TICKET_LINK(); return; }
     if ($("#as-chat-toggle")) return;
     const toggle = document.createElement("button");
     toggle.id = "as-chat-toggle";

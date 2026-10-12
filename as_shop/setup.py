@@ -8,6 +8,8 @@ import frappe
 
 def after_install():
     setup_shop()
+    from as_shop.payment_setup import setup_payments
+    setup_payments()
 
 
 def setup_shop():

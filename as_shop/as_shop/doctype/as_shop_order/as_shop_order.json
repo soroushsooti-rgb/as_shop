@@ -1,0 +1,280 @@
+{
+  "doctype": "DocType",
+  "name": "AS Shop Order",
+  "module": "AS Shop",
+  "custom": 0,
+  "engine": "InnoDB",
+  "field_order": [
+    "customer_id",
+    "customer_name",
+    "customer_email",
+    "cart",
+    "payment_status",
+    "fulfillment_status",
+    "needs_review",
+    "tracking_code",
+    "shipping_company",
+    "admin_notes",
+    "recipient_name",
+    "mobile",
+    "province",
+    "city",
+    "address",
+    "postal_code",
+    "customer_notes",
+    "currency",
+    "subtotal",
+    "shipping_fee",
+    "total_amount",
+    "total_qty",
+    "reserved",
+    "expires_at",
+    "paid_at",
+    "posted_at",
+    "delivered_at",
+    "active_attempt",
+    "payment_reference",
+    "items",
+    "events",
+    "language",
+    "is_test"
+  ],
+  "fields": [
+    {
+      "fieldname": "customer_id",
+      "fieldtype": "Data",
+      "label": "Customer Identity",
+      "read_only": 1,
+      "reqd": 1,
+      "hidden": 1
+    },
+    {
+      "fieldname": "customer_name",
+      "fieldtype": "Data",
+      "label": "Account Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "customer_email",
+      "fieldtype": "Data",
+      "label": "Account Email",
+      "read_only": 1
+    },
+    {
+      "fieldname": "cart",
+      "fieldtype": "Link",
+      "label": "Cart",
+      "options": "AS Shop Cart",
+      "read_only": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "payment_status",
+      "fieldtype": "Select",
+      "label": "Payment Status",
+      "read_only": 1,
+      "options": "Awaiting Payment\nPaid\nFailed\nExpired",
+      "default": "Awaiting Payment",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "fulfillment_status",
+      "fieldtype": "Select",
+      "label": "Fulfillment Status",
+      "options": "Preparing\nPosted\nDelivered",
+      "default": "Preparing",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "needs_review",
+      "fieldtype": "Check",
+      "label": "Requires Stock Review",
+      "read_only": 1
+    },
+    {
+      "fieldname": "tracking_code",
+      "fieldtype": "Data",
+      "label": "Postal Tracking Code"
+    },
+    {
+      "fieldname": "shipping_company",
+      "fieldtype": "Data",
+      "label": "Shipping Company"
+    },
+    {
+      "fieldname": "admin_notes",
+      "fieldtype": "Small Text",
+      "label": "Internal Notes"
+    },
+    {
+      "fieldname": "recipient_name",
+      "fieldtype": "Data",
+      "label": "Recipient",
+      "read_only": 1
+    },
+    {
+      "fieldname": "mobile",
+      "fieldtype": "Data",
+      "label": "Recipient Mobile",
+      "read_only": 1
+    },
+    {
+      "fieldname": "province",
+      "fieldtype": "Data",
+      "label": "Province",
+      "read_only": 1
+    },
+    {
+      "fieldname": "city",
+      "fieldtype": "Data",
+      "label": "City",
+      "read_only": 1
+    },
+    {
+      "fieldname": "address",
+      "fieldtype": "Small Text",
+      "label": "Address",
+      "read_only": 1
+    },
+    {
+      "fieldname": "postal_code",
+      "fieldtype": "Data",
+      "label": "Postal Code",
+      "read_only": 1
+    },
+    {
+      "fieldname": "customer_notes",
+      "fieldtype": "Small Text",
+      "label": "Customer Notes",
+      "read_only": 1
+    },
+    {
+      "fieldname": "currency",
+      "fieldtype": "Data",
+      "label": "Currency",
+      "read_only": 1,
+      "default": "Toman"
+    },
+    {
+      "fieldname": "subtotal",
+      "fieldtype": "Currency",
+      "label": "Subtotal (Toman)",
+      "read_only": 1
+    },
+    {
+      "fieldname": "shipping_fee",
+      "fieldtype": "Currency",
+      "label": "Shipping (Toman)",
+      "read_only": 1
+    },
+    {
+      "fieldname": "total_amount",
+      "fieldtype": "Currency",
+      "label": "Total (Toman)",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "total_qty",
+      "fieldtype": "Int",
+      "label": "Quantity",
+      "read_only": 1
+    },
+    {
+      "fieldname": "reserved",
+      "fieldtype": "Check",
+      "label": "Stock Reserved",
+      "read_only": 1,
+      "hidden": 1
+    },
+    {
+      "fieldname": "expires_at",
+      "fieldtype": "Datetime",
+      "label": "Payment Deadline",
+      "read_only": 1
+    },
+    {
+      "fieldname": "paid_at",
+      "fieldtype": "Datetime",
+      "label": "Paid At",
+      "read_only": 1
+    },
+    {
+      "fieldname": "posted_at",
+      "fieldtype": "Datetime",
+      "label": "Posted At",
+      "read_only": 1
+    },
+    {
+      "fieldname": "delivered_at",
+      "fieldtype": "Datetime",
+      "label": "Delivered At",
+      "read_only": 1
+    },
+    {
+      "fieldname": "active_attempt",
+      "fieldtype": "Link",
+      "label": "Payment Attempt",
+      "options": "AS Shop Payment Attempt",
+      "read_only": 1,
+      "hidden": 1
+    },
+    {
+      "fieldname": "payment_reference",
+      "fieldtype": "Data",
+      "label": "Payment Reference",
+      "read_only": 1
+    },
+    {
+      "fieldname": "items",
+      "fieldtype": "Table",
+      "label": "Items",
+      "options": "AS Shop Order Item",
+      "read_only": 1
+    },
+    {
+      "fieldname": "events",
+      "fieldtype": "Table",
+      "label": "History",
+      "options": "AS Shop Order Event",
+      "read_only": 1
+    },
+    {
+      "fieldname": "language",
+      "fieldtype": "Select",
+      "label": "Language",
+      "options": "fa\nen",
+      "default": "fa",
+      "read_only": 1
+    },
+    {
+      "fieldname": "is_test",
+      "fieldtype": "Check",
+      "label": "Test Order",
+      "read_only": 1
+    }
+  ],
+  "autoname": "format:AS-ORD-{YYYY}-{#####}",
+  "track_changes": 1,
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    },
+    {
+      "role": "AS Shop Manager",
+      "read": 1,
+      "write": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    }
+  ],
+  "title_field": "recipient_name",
+  "sort_field": "creation",
+  "sort_order": "DESC"
+}

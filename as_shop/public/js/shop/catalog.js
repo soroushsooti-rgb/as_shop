@@ -92,6 +92,10 @@
       if (!existing || error.status !== 403) throw error;
       saveToken(""); server = await cartRequest(cartEndpoint, {});
     }
+    if (server.status !== "Open") {
+      saveToken("");
+      server = await cartRequest(cartEndpoint, {});
+    }
     applyServerCart(server);
     // Existing local quantities are imported once; each item is validated by the server.
     for (const [id, qty] of Object.entries(legacy)) {
@@ -262,6 +266,15 @@
     else if (/^\/shop\/(pets|product)\/[^/]+$/.test(path)) container.innerHTML = detail(decodeURIComponent(path.split("/").pop()));
     else container.innerHTML = listing(path === "/nixa" ? "pets" : path.startsWith("/shop/") ? path.split("/")[2] : null);
     restorePresentation(container);
+    if (["/cart","/shop/basket"].includes(path) && products !== null) {
+      const summary=container.querySelector(".eco-basket-summary,.shop-total");
+      if (summary) {
+        const button=document.createElement("button");button.type="button";button.className="button primary";button.dataset.shopCheckout="1";
+        button.textContent=text("Checkout & payment →","تکمیل خرید و پرداخت ←");
+        button.disabled=!basketQuantity()||!Object.entries(cart).every(([id,qty])=>find(id)?.available&&find(id).stock_qty>=qty);
+        summary.append(button);
+      }
+    }
     bind(container);
     const classicCount = document.getElementById("ecoBasketCount");
     if (classicCount) classicCount.textContent = number(Object.values(cart).reduce((a, b) => a + b, 0));
@@ -369,6 +382,18 @@
     container.onclick = event => {
       const add = event.target.closest("[data-shop-add], .eco-card-add[data-eco-add], .eco-detail-add[data-eco-add]");
       const remove = event.target.closest("[data-shop-remove]");
+      const checkout=event.target.closest("[data-shop-checkout]");
+      if (checkout) {
+        event.preventDefault();if(checkout.disabled)return;checkout.disabled=true;
+        cartSync.then(()=>fetchCart(false)).then(()=>{
+          if(!basketQuantity())throw Error("The basket is empty");
+          const route="/checkout?cart="+encodeURIComponent(cartToken);
+          const url=window.SHN_NAVIGATION?.targetURL("as",route);
+          if(!url)throw Error("Account website unavailable");
+          location.assign(url);
+        }).catch(()=>{checkout.disabled=false;window.alert(text("Checkout could not be opened. Refresh your basket.","صفحه پرداخت باز نشد؛ سبد را تازه‌سازی کنید."));});
+        return;
+      }
       if (add) {
         event.preventDefault();
         const p = find(add.dataset.shopAdd || add.dataset.ecoAdd);

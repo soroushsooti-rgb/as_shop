@@ -1,0 +1,37 @@
+{
+  "doctype": "DocType",
+  "name": "AS Shop Order Event",
+  "module": "AS Shop",
+  "custom": 0,
+  "engine": "InnoDB",
+  "field_order": [
+    "event_type",
+    "message",
+    "occurred_at",
+    "actor"
+  ],
+  "fields": [
+    {
+      "fieldname": "event_type",
+      "fieldtype": "Data",
+      "label": "Event"
+    },
+    {
+      "fieldname": "message",
+      "fieldtype": "Data",
+      "label": "Message"
+    },
+    {
+      "fieldname": "occurred_at",
+      "fieldtype": "Datetime",
+      "label": "Time"
+    },
+    {
+      "fieldname": "actor",
+      "fieldtype": "Data",
+      "label": "Actor",
+      "hidden": 1
+    }
+  ],
+  "istable": 1
+}
