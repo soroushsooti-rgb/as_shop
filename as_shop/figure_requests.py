@@ -2,13 +2,16 @@
 
 import frappe
 from frappe import _
+from frappe.utils.file_manager import save_file
 
 FIGURE_REQUEST = "AS Shop Figure Request"
 
 
 @frappe.whitelist(methods=["POST"])
 def submit_figure_request(**kwargs):
-    """Create a figure request owned by the logged-in user."""
+    """Create a figure request owned by the logged-in user.
+    Supports optional multipart upload via form field name: reference_image
+    """
     user = frappe.session.user
     if user in ("Guest", None):
         frappe.throw(_("Please sign in to submit a request"), frappe.PermissionError)
@@ -34,6 +37,26 @@ def submit_figure_request(**kwargs):
         }
     )
     doc.insert(ignore_permissions=False)
+
+    uploaded = None
+    try:
+        if getattr(frappe, "request", None) and hasattr(frappe.request, "files"):
+            uploaded = frappe.request.files.get("reference_image")
+    except Exception:
+        uploaded = None
+
+    if uploaded:
+        content = uploaded.stream.read()
+        filename = uploaded.filename or "reference.png"
+        fdoc = save_file(
+            fname=filename,
+            content=content,
+            dt=FIGURE_REQUEST,
+            dn=doc.name,
+            is_private=0,
+        )
+        doc.db_set("reference_image", fdoc.file_url, update_modified=False)
+
     return {"ok": True, "name": doc.name, "message": _("Your request has been saved")}
 
 
