@@ -22,7 +22,11 @@
         if (event.origin !== accountURL.origin || event.source !== accountWindow) return;
         if (event.data?.kind === "as-figure-ready" && !sent) {
           sent = true;
-          accountWindow.postMessage({kind:"as-figure-request",id,action,fields:[...formData.entries()]},accountURL.origin);
+          // Transfer image bytes, rather than a filesystem-backed File between origins.
+          Promise.all([...formData.entries()].map(async ([key,value]) =>
+            [key, value instanceof File ? {filename:value.name,mime:value.type,bytes:await value.arrayBuffer()} : value]
+          )).then(fields => accountWindow.postMessage({kind:"as-figure-request",id,action,fields},accountURL.origin))
+            .catch(error => { cleanup(); accountWindow.close(); reject(error); });
         }
         if (event.data?.kind === "as-figure-pending" && event.data.id === id) onPending?.(event.data.message);
         if (event.data?.kind !== "as-figure-result" || event.data.id !== id) return;
