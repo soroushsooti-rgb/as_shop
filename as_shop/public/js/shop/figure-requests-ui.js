@@ -8,7 +8,7 @@
   };
   const state = window.__AS_SHOP_FORM_STATE__;
 
-  function sharedAccount(action, formData) {
+  function sharedAccount(action, formData, onPending) {
     const accountURL = new URL(window.SHN_INTEGRATION.app_urls.as, location.origin);
     const id = crypto.randomUUID();
     // A top-level account window retains its own SameSite session across independent hosts.
@@ -17,19 +17,23 @@
     if (!accountWindow) return Promise.reject(new Error("Allow the account window, then send the form again. Your form and photo are kept."));
     return new Promise((resolve, reject) => {
       let sent = false;
-      const cleanup = () => { clearTimeout(timer); window.removeEventListener("message", receive); };
+      const cleanup = () => { clearTimeout(timer); clearInterval(closedTimer); window.removeEventListener("message", receive); };
       const receive = event => {
         if (event.origin !== accountURL.origin || event.source !== accountWindow) return;
         if (event.data?.kind === "as-figure-ready" && !sent) {
           sent = true;
           accountWindow.postMessage({kind:"as-figure-request",id,action,fields:[...formData.entries()]},accountURL.origin);
         }
+        if (event.data?.kind === "as-figure-pending" && event.data.id === id) onPending?.(event.data.message);
         if (event.data?.kind !== "as-figure-result" || event.data.id !== id) return;
         cleanup();
         if (event.data.error) reject(new Error(event.data.error));
         else { accountWindow.close(); resolve(event.data.result); }
       };
-      const timer = setTimeout(() => { cleanup(); reject(new Error("Account connection timed out. Please retry.")); },90000);
+      const timer = setTimeout(() => { cleanup(); accountWindow.close(); reject(new Error("Account connection timed out. Your form and photo are kept; please retry.")); },300000);
+      const closedTimer = setInterval(() => {
+        if (accountWindow.closed) { cleanup(); reject(new Error("Account window closed. Your form and photo are kept; send again to retry.")); }
+      },500);
       window.addEventListener("message",receive);
     });
   }
@@ -111,6 +115,11 @@
     });
     const send = form.querySelector('[type="submit"]');
     if (send) send.textContent = document.documentElement.lang === "fa" ? "ارسال درخواست" : "Send request";
+    const status = document.createElement("p");
+    status.dataset.figureStatus = "1";
+    status.setAttribute("role", "status");
+    status.setAttribute("aria-live", "polite");
+    form.append(status);
     const typeParam = getQueryParam("type");
     if (typeParam && !state.type) state.type = typeParam;
     const designParam = getQueryParam("design");
@@ -175,6 +184,7 @@
       const origText = btn ? btn.textContent : "";
       if (btn) { btn.disabled = true; btn.textContent = "Submitting..."; }
 
+      status.textContent = "Submitting your request…";
       try {
         const typeEl = form.querySelector('input[name="ecoType"]:checked');
         const reqType = typeEl?.value || form.querySelector('[name="type"]')?.value || getQueryParam("type") || "pet";
@@ -192,25 +202,30 @@
         fd.append("details", [...extra, (form.querySelector("#ecoDetails")?.value || state.details || "").trim()].join("\n"));
         fd.append("source_page", window.location.hash || "shop-request-form");
         if (activeFile) fd.append("reference_image", activeFile, activeFile.name);
-        const result = await sharedAccount("submit", fd);
-        const data = {message: result};
-        if (result?.ok) {
-          alert(`Success! Request (${data.message.name}) submitted.`);
-          state.fields = {}; state.type = ""; state.design = ""; state.name = ""; state.contact = "";
-          state.size = "Not sure yet"; state.quantity = "1"; state.details = ""; state.file = null;
-          if (state.filePreviewUrl) URL.revokeObjectURL(state.filePreviewUrl);
-          state.filePreviewUrl = ""; state.fileName = "";
-          form.reset();
-          const profile = new URL(window.SHN_INTEGRATION.app_urls.as, location.origin);
-          profile.hash = "/profile";
-          location.assign(profile.href);
-        } else {
-          const err = (data._server_messages && JSON.parse(data._server_messages)[0]) || data.message || "Failed";
-          alert(`Error: ${typeof err === "object" ? err.message : err}`);
-        }
+        const result = await sharedAccount("submit", fd, message => { status.textContent = message; });
+        if (!result?.ok || !result.name) throw new Error("The server did not confirm a saved request. Your form and photo are kept.");
+        status.textContent = (document.documentElement.lang === "fa" ? "درخواست ثبت شد. شماره پیگیری: " : "Request saved. Reference: ") + result.name + " ";
+        const orders = new URL(window.SHN_INTEGRATION.app_urls.as, location.origin);
+        orders.searchParams.set("lang", document.documentElement.lang || "en");
+        orders.hash = "/orders?figure=" + encodeURIComponent(result.name);
+        const link = document.createElement("a");
+        link.href = orders.href;
+        link.className = "button primary";
+        link.textContent = document.documentElement.lang === "fa" ? "مشاهده در سفارش‌های من" : "View in My Orders";
+        status.append(link);
+        state.fields = {}; state.type = ""; state.design = ""; state.name = ""; state.contact = "";
+        state.size = "Not sure yet"; state.quantity = "1"; state.details = ""; state.file = null;
+        if (state.filePreviewUrl) URL.revokeObjectURL(state.filePreviewUrl);
+        state.filePreviewUrl = ""; state.fileName = "";
+        form.reset();
+        const preview = form.querySelector("#ecoReferencePreview");
+        if (preview) { preview.removeAttribute("src"); preview.hidden = true; }
+        const note = form.querySelector("#ecoFileNote");
+        if (note) note.textContent = "";
+        document.querySelector("#ecoLivePhoto img")?.remove();
       } catch (err) {
         console.error("Submission failed:", err);
-        alert(err.message || "An error occurred while submitting.");
+        status.textContent = err.message || "An error occurred while submitting. Your form and photo are kept.";
       } finally {
         delete form.dataset.submitting;
         if (btn) { btn.disabled = false; btn.textContent = origText; }
