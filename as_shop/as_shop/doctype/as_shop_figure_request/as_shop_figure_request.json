@@ -5,6 +5,7 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "customer_id",
   "request_type",
   "design_reference",
   "full_name",
@@ -19,11 +20,20 @@
  ],
  "fields": [
   {
+   "fieldname": "customer_id",
+   "fieldtype": "Data",
+   "label": "Customer Account",
+   "read_only": 1,
+   "hidden": 1
+  },
+  {
    "fieldname": "request_type",
    "fieldtype": "Select",
    "label": "Request Type",
    "options": "pet\nfamily\nkitchen\nnfc\ngadgets\nfurniture\nidea",
-   "reqd": 1
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
   },
   {
    "fieldname": "design_reference",
@@ -34,7 +44,8 @@
    "fieldname": "full_name",
    "fieldtype": "Data",
    "label": "Full Name",
-   "reqd": 1
+   "reqd": 1,
+   "in_list_view": 1
   },
   {
    "fieldname": "contact",
@@ -64,7 +75,8 @@
   {
    "fieldname": "reference_image",
    "fieldtype": "Attach",
-   "label": "Photo / Sketch / Reference"
+   "label": "Photo / Sketch / Reference",
+   "in_list_view": 1
   },
   {
    "collapsible": 1,

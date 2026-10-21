@@ -1,297 +1,237 @@
-/**
- * AS Shop - Figure Requests Client Integration
- * Part 1: State Store & Field Restoration
- */
-
 (function () {
   "use strict";
 
   window.__AS_SHOP_FORM_STATE__ = window.__AS_SHOP_FORM_STATE__ || {
-    name: "",
-    contact: "",
-    size: "Not sure yet",
-    quantity: "1",
-    details: "",
-    file: null,
-    fileDataUrl: "",
-    fileName: ""
+    type: "", design: "", name: "", contact: "", size: "Not sure yet",
+    quantity: "1", details: "", file: null,
+    filePreviewUrl: "", fileName: ""
   };
-
   const state = window.__AS_SHOP_FORM_STATE__;
 
-  function getCsrfToken() {
-    if (window.frappe && window.frappe.csrf_token && window.frappe.csrf_token !== "{{ csrf_token }}") {
-      return window.frappe.csrf_token;
-    }
-    const cookie = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("csrf_token="));
-    return cookie ? decodeURIComponent(cookie.split("=")[1]) : "";
+  function sharedAccount(action, formData) {
+    const accountURL = new URL(window.SHN_INTEGRATION.app_urls.as, location.origin);
+    const id = crypto.randomUUID();
+    // A top-level account window retains its own SameSite session across independent hosts.
+    const accountWindow = window.open(new URL("/as-figure-bridge", accountURL).href,
+      "as-figure-account", "width=520,height=400");
+    if (!accountWindow) return Promise.reject(new Error("Allow the account window, then send the form again. Your form and photo are kept."));
+    return new Promise((resolve, reject) => {
+      let sent = false;
+      const cleanup = () => { clearTimeout(timer); window.removeEventListener("message", receive); };
+      const receive = event => {
+        if (event.origin !== accountURL.origin || event.source !== accountWindow) return;
+        if (event.data?.kind === "as-figure-ready" && !sent) {
+          sent = true;
+          accountWindow.postMessage({kind:"as-figure-request",id,action,fields:[...formData.entries()]},accountURL.origin);
+        }
+        if (event.data?.kind !== "as-figure-result" || event.data.id !== id) return;
+        cleanup();
+        if (event.data.error) reject(new Error(event.data.error));
+        else { accountWindow.close(); resolve(event.data.result); }
+      };
+      const timer = setTimeout(() => { cleanup(); reject(new Error("Account connection timed out. Please retry.")); },90000);
+      window.addEventListener("message",receive);
+    });
   }
 
   function getQueryParam(key) {
     const hash = window.location.hash || "";
     const qIndex = hash.indexOf("?");
     if (qIndex === -1) return null;
-    const params = new URLSearchParams(hash.substring(qIndex));
-    return params.get(key);
+    return new URLSearchParams(hash.substring(qIndex)).get(key);
   }
 
-  function applyPresetParams() {
-    const form = document.querySelector("#ecoRequestForm");
+  function captureFormState(form) {
     if (!form) return;
-
-    const typeParam = getQueryParam("type");
-    const designParam = getQueryParam("design");
-
-    if (typeParam) {
-      const typeRadio = form.querySelector(`input[name="ecoType"][value="${typeParam}"]`);
-      if (typeRadio && !typeRadio.checked) {
-        typeRadio.checked = true;
-        typeRadio.dispatchEvent(new Event("change", { bubbles: true }));
-      }
+    const typeEl = form.querySelector('input[name="ecoType"]:checked');
+    state.type = typeEl?.value || form.querySelector('[name="type"]')?.value || state.type || getQueryParam("type") || "";
+    state.fields = {};
+    for (const el of form.elements) {
+      if (!el.name || el.type === "file" || ["submit", "button"].includes(el.type)) continue;
+      state.fields[el.name] = ["checkbox", "radio"].includes(el.type) ? el.checked : el.value;
     }
-
-    if (designParam) {
-      const designInput = form.querySelector("#ecoDesign");
-      if (designInput && !designInput.value) {
-        designInput.value = designParam;
-      }
-    }
+    state.design = form.querySelector("#ecoDesign")?.value ?? state.design ?? "";
+    state.name = form.querySelector("#ecoName")?.value || "";
+    state.contact = form.querySelector("#ecoContact")?.value || "";
+    state.size = form.querySelector("#ecoSize")?.value || "Not sure yet";
+    state.quantity = form.querySelector("#ecoQuantity")?.value || "1";
+    state.details = form.querySelector("#ecoDetails")?.value || "";
   }
 
   function restoreFormState(form) {
     if (!form) return;
-    const nameInput = form.querySelector("#ecoName");
-    const contactInput = form.querySelector("#ecoContact");
-    const sizeInput = form.querySelector("#ecoSize");
-    const qtyInput = form.querySelector("#ecoQuantity");
-    const detailsInput = form.querySelector("#ecoDetails");
-    const preview = form.querySelector("#ecoReferencePreview") || document.querySelector("#ecoReferencePreview");
-    const note = form.querySelector("#ecoFileNote") || document.querySelector("#ecoFileNote");
-
-    if (nameInput && state.name && !nameInput.value) nameInput.value = state.name;
-    if (contactInput && state.contact && !contactInput.value) contactInput.value = state.contact;
-    if (sizeInput && state.size && sizeInput.value !== state.size) sizeInput.value = state.size;
-    if (qtyInput && state.quantity && (!qtyInput.value || qtyInput.value === "1")) qtyInput.value = state.quantity;
-    if (detailsInput && state.details && !detailsInput.value) detailsInput.value = state.details;
-
-    if (preview && state.fileDataUrl) {
-      preview.src = state.fileDataUrl;
-      preview.hidden = false;
+    for (const el of form.elements) {
+      if (!el.name || !state.fields || !(el.name in state.fields)) continue;
+      if (["checkbox", "radio"].includes(el.type)) el.checked = state.fields[el.name];
+      else if (el.type !== "file") el.value = state.fields[el.name];
     }
-    if (note && state.fileName) {
-      note.textContent = `Attached: ${state.fileName}`;
+    const type = form.querySelector('[name="type"]');
+    if (type && state.type) type.value = state.type;
+    const fileInput = form.querySelector("#ecoReference");
+    if (state.file && fileInput && !fileInput.files?.length) {
+      const transfer = new DataTransfer();
+      transfer.items.add(state.file);
+      fileInput.files = transfer.files;
     }
+    if (state.type) {
+      const typeEl = form.querySelector(`input[name="ecoType"][value="${CSS.escape(state.type)}"]`);
+      if (typeEl) typeEl.checked = true;
+    }
+    const values = {
+      ecoDesign: state.design, ecoName: state.name, ecoContact: state.contact,
+      ecoSize: state.size, ecoQuantity: state.quantity, ecoDetails: state.details
+    };
+    Object.entries(values).forEach(([id, value]) => {
+      const el = form.querySelector(`#${id}`);
+      if (el && value !== undefined) el.value = value;
+    });
   }
-  function initForm() {
-    const form = document.querySelector("#ecoRequestForm");
-    if (!form || form.dataset.asShopInit === "1") return;
-    form.dataset.asShopInit = "1";
 
-    applyPresetParams();
+  function initForm() {
+    let form = document.querySelector("#ecoRequestForm");
+    if (!form || form.dataset.asShopBound === "1") return;
+    // Remove offline preview handlers before owning file and submit events.
+    const clean = form.cloneNode(true);
+    form.replaceWith(clean);
+    form = clean;
+    form.dataset.asShopBound = "1";
+
+    const ids = {name:"ecoName",contact:"ecoContact",design:"ecoDesign",size:"ecoSize",
+      quantity:"ecoQuantity",details:"ecoDetails"};
+    for (const [name,id] of Object.entries(ids)) {
+      const field = form.querySelector('[name="' + name + '"]');
+      if (field && !field.id) field.id = id;
+    }
+    const upload = form.querySelector("#ecoReference");
+    if (upload) upload.accept = "image/jpeg,image/png,image/webp";
+    const details = form.querySelector("#ecoDetails");
+    if (details) details.required = true;
+    form.querySelectorAll("p.micro").forEach(p => {
+      if (/offline|local preview|does not submit|stays on this device/i.test(p.textContent)) p.remove();
+    });
+    const send = form.querySelector('[type="submit"]');
+    if (send) send.textContent = document.documentElement.lang === "fa" ? "ارسال درخواست" : "Send request";
+    const typeParam = getQueryParam("type");
+    if (typeParam && !state.type) state.type = typeParam;
+    const designParam = getQueryParam("design");
+    if (designParam && !state.design) state.design = designParam;
     restoreFormState(form);
 
-    const inputs = form.querySelectorAll("input, textarea, select");
-    inputs.forEach((inp) => {
-      inp.addEventListener("input", () => {
-        if (inp.id === "ecoName") state.name = inp.value;
-        if (inp.id === "ecoContact") state.contact = inp.value;
-        if (inp.id === "ecoSize") state.size = inp.value;
-        if (inp.id === "ecoQuantity") state.quantity = inp.value;
-        if (inp.id === "ecoDetails") state.details = inp.value;
-      });
-      inp.addEventListener("change", () => {
-        if (inp.id === "ecoName") state.name = inp.value;
-        if (inp.id === "ecoContact") state.contact = inp.value;
-        if (inp.id === "ecoSize") state.size = inp.value;
-        if (inp.id === "ecoQuantity") state.quantity = inp.value;
-        if (inp.id === "ecoDetails") state.details = inp.value;
-      });
-    });
-
-    const fileInput = document.querySelector("#ecoReference");
-    if (fileInput && !fileInput.dataset.asShopBound) {
-      fileInput.dataset.asShopBound = "1";
-      fileInput.addEventListener(
-        "change",
-        function () {
-          const file = fileInput.files && fileInput.files[0];
-          if (!file) return;
-
-          state.file = file;
-          state.fileName = file.name;
-
-          const preview = document.querySelector("#ecoReferencePreview");
-          const note = document.querySelector("#ecoFileNote");
-
-          const reader = new FileReader();
-          reader.onload = function (evt) {
-            state.fileDataUrl = evt.target.result;
-            if (preview) {
-              preview.src = state.fileDataUrl;
-              preview.hidden = false;
-            }
-          };
-          reader.readAsDataURL(file);
-
-          if (note) {
-            const kb = (file.size / 1024).toFixed(1);
-            note.textContent = `Attached: ${file.name} (${kb} KB)`;
-          }
-
-          setTimeout(() => {
-            const freshForm = document.querySelector("#ecoRequestForm");
-            restoreFormState(freshForm);
-          }, 30);
-          setTimeout(() => {
-            const freshForm = document.querySelector("#ecoRequestForm");
-            restoreFormState(freshForm);
-          }, 150);
-        },
-        true
-      );
+    if (state.filePreviewUrl) {
+      const p = form.querySelector("#ecoReferencePreview") || document.querySelector("#ecoReferencePreview");
+      if (p) { p.src = state.filePreviewUrl; p.hidden = false; }
     }
+    if (state.fileName) {
+      const n = form.querySelector("#ecoFileNote") || document.querySelector("#ecoFileNote");
+      if (n) n.textContent = `Attached: ${state.fileName}`;
+    }
+    form.addEventListener("input", (event) => { if (event.target.type !== "file") captureFormState(form); }, true);
+
+    form.addEventListener("change", (e) => {
+      captureFormState(form);
+      const el = e.target;
+      if (el.id === "ecoReference") {
+        el.setCustomValidity("");
+        e.stopImmediatePropagation();
+        const file = el.files && el.files[0];
+        if (!file) return;
+        if (!["image/jpeg", "image/png", "image/webp"].includes(file.type) || file.size > 5 * 1024 * 1024) {
+          el.value = "";
+          el.setCustomValidity("Choose a JPEG, PNG or WebP image up to 5 MB.");
+          el.reportValidity();
+          return;
+        }
+        el.setCustomValidity("");
+        state.file = file;
+        state.fileName = file.name;
+        if (state.filePreviewUrl) URL.revokeObjectURL(state.filePreviewUrl);
+        state.filePreviewUrl = URL.createObjectURL(file);
+
+        const p = form.querySelector("#ecoReferencePreview") || document.querySelector("#ecoReferencePreview");
+        const n = form.querySelector("#ecoFileNote") || document.querySelector("#ecoFileNote");
+        if (p) { p.src = state.filePreviewUrl; p.hidden = false; }
+        if (n) n.textContent = `Attached: ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+        const stage = document.querySelector("#ecoLivePhoto");
+        if (stage) {
+          const image = document.createElement("img");
+          image.src = state.filePreviewUrl;
+          image.alt = "Your reference photo";
+          stage.replaceChildren(image);
+        }
+        setTimeout(() => restoreFormState(document.querySelector("#ecoRequestForm")), 0);
+        setTimeout(() => restoreFormState(document.querySelector("#ecoRequestForm")), 100);
+      }
+    }, true);
     form.addEventListener("submit", async function (e) {
       e.preventDefault();
       e.stopPropagation();
+      e.stopImmediatePropagation();
+      if (form.dataset.submitting === "1") return;
+      captureFormState(form);
+      if (!form.reportValidity()) return;
+      form.dataset.submitting = "1";
 
       const btn = form.querySelector('button[type="submit"]');
-      const originalText = btn ? btn.textContent : "";
-      if (btn) {
-        btn.disabled = true;
-        btn.textContent = "Submitting...";
-      }
+      const origText = btn ? btn.textContent : "";
+      if (btn) { btn.disabled = true; btn.textContent = "Submitting..."; }
 
       try {
         const typeEl = form.querySelector('input[name="ecoType"]:checked');
-        const reqType = typeEl ? typeEl.value : (getQueryParam("type") || "pet");
-        const designVal = (form.querySelector("#ecoDesign")?.value || getQueryParam("design") || "").trim();
-        const nameVal = (form.querySelector("#ecoName")?.value || state.name || "").trim();
-        const contactVal = (form.querySelector("#ecoContact")?.value || state.contact || "").trim();
-        const sizeVal = (form.querySelector("#ecoSize")?.value || state.size || "Not sure yet").trim();
-        const qtyVal = parseInt(form.querySelector("#ecoQuantity")?.value || state.quantity || "1", 10);
-        const detailsVal = (form.querySelector("#ecoDetails")?.value || state.details || "").trim();
-
-        const fileInputEl = document.querySelector("#ecoReference");
-        const activeFile = (fileInputEl && fileInputEl.files && fileInputEl.files[0]) || state.file;
+        const reqType = typeEl?.value || form.querySelector('[name="type"]')?.value || getQueryParam("type") || "pet";
+        const activeFile = state.file || (form.querySelector("#ecoReference")?.files?.[0]);
 
         const fd = new FormData();
         fd.append("type", reqType);
-        fd.append("design", designVal);
-        fd.append("name", nameVal);
-        fd.append("contact", contactVal);
-        fd.append("size", sizeVal);
-        fd.append("quantity", qtyVal);
-        fd.append("details", detailsVal);
+        fd.append("design", (form.querySelector("#ecoDesign")?.value || getQueryParam("design") || "").trim());
+        fd.append("name", (form.querySelector("#ecoName")?.value || state.name || "").trim());
+        fd.append("contact", (form.querySelector("#ecoContact")?.value || state.contact || "").trim());
+        fd.append("size", (form.querySelector("#ecoSize")?.value || state.size || "Not sure yet").trim());
+        fd.append("quantity", parseInt(form.querySelector("#ecoQuantity")?.value || state.quantity || "1", 10));
+        const extra = [...form.elements].filter(el => ["breed","petName"].includes(el.name) && el.value)
+          .map(el => el.name + ": " + el.value);
+        fd.append("details", [...extra, (form.querySelector("#ecoDetails")?.value || state.details || "").trim()].join("\n"));
         fd.append("source_page", window.location.hash || "shop-request-form");
-
-        if (activeFile) {
-          fd.append("reference_image", activeFile, activeFile.name);
-        }
-
-        const headers = {};
-        const csrf = getCsrfToken();
-        if (csrf) headers["X-Frappe-CSRF-Token"] = csrf;
-
-        const res = await fetch("/api/method/as_shop.figure_requests.submit_figure_request", {
-          method: "POST",
-          headers: headers,
-          body: fd,
-        });
-
-        const data = await res.json();
-
-        if (res.ok && data.message && data.message.ok) {
-          const reqName = data.message.name;
-          alert(`Success! Your request (${reqName}) has been submitted.`);
-          state.name = "";
-          state.contact = "";
-          state.details = "";
-          state.file = null;
-          state.fileDataUrl = "";
-          state.fileName = "";
+        if (activeFile) fd.append("reference_image", activeFile, activeFile.name);
+        const result = await sharedAccount("submit", fd);
+        const data = {message: result};
+        if (result?.ok) {
+          alert(`Success! Request (${data.message.name}) submitted.`);
+          state.fields = {}; state.type = ""; state.design = ""; state.name = ""; state.contact = "";
+          state.size = "Not sure yet"; state.quantity = "1"; state.details = ""; state.file = null;
+          if (state.filePreviewUrl) URL.revokeObjectURL(state.filePreviewUrl);
+          state.filePreviewUrl = ""; state.fileName = "";
           form.reset();
-          window.location.hash = "#/account";
+          const profile = new URL(window.SHN_INTEGRATION.app_urls.as, location.origin);
+          profile.hash = "/profile";
+          location.assign(profile.href);
         } else {
-          const err = (data._server_messages && JSON.parse(data._server_messages)[0]) || data.message || "Failed to submit";
-          const msg = typeof err === "object" ? err.message : err;
-          alert(`Error: ${msg || "Submission failed"}`);
+          const err = (data._server_messages && JSON.parse(data._server_messages)[0]) || data.message || "Failed";
+          alert(`Error: ${typeof err === "object" ? err.message : err}`);
         }
       } catch (err) {
         console.error("Submission failed:", err);
-        alert("An error occurred while submitting. Please try again.");
+        alert(err.message || "An error occurred while submitting.");
       } finally {
-        if (btn) {
-          btn.disabled = false;
-          btn.textContent = originalText;
-        }
+        delete form.dataset.submitting;
+        if (btn) { btn.disabled = false; btn.textContent = origText; }
       }
-    });
-  }
-  async function loadMyRequests() {
-    const container = document.querySelector("#asShopMyRequests");
-    if (!container) return;
-
-    container.innerHTML = '<p class="micro">Loading your figure requests...</p>';
-
-    try {
-      const res = await fetch("/api/method/as_shop.figure_requests.get_my_figure_requests");
-      const data = await res.json();
-      const list = (data.message && data.message.requests) || [];
-
-      if (!list.length) {
-        container.innerHTML = '<p class="micro">No figure requests submitted yet.</p>';
-        return;
-      }
-
-      let html = '<div class="as-shop-requests-table" style="overflow-x:auto; margin-top:1rem;">';
-      html += '<table style="width:100%; border-collapse:collapse; font-size:0.9rem;">';
-      html += '<thead><tr style="border-bottom:1px solid #ccc; text-align:left;">';
-      html += '<th style="padding:8px;">ID</th><th style="padding:8px;">Type</th><th style="padding:8px;">Status</th><th style="padding:8px;">Size</th><th style="padding:8px;">Date</th>';
-      html += '</tr></thead><tbody>';
-
-      list.forEach((r) => {
-        const dateStr = r.creation ? r.creation.split(" ")[0] : "";
-        html += `<tr style="border-bottom:1px solid #eee;">
-          <td style="padding:8px; font-weight:bold;">${r.name}</td>
-          <td style="padding:8px; text-transform:capitalize;">${r.request_type}</td>
-          <td style="padding:8px;"><span class="badge badge-${r.status.toLowerCase()}">${r.status}</span></td>
-          <td style="padding:8px;">${r.preferred_size || "-"}</td>
-          <td style="padding:8px;">${dateStr}</td>
-        </tr>`;
-      });
-
-      html += '</tbody></table></div>';
-      container.innerHTML = html;
-    } catch (e) {
-      console.error(e);
-      container.innerHTML = '<p class="micro" style="color:red;">Error loading requests.</p>';
-    }
+    }, true);
   }
 
   function handleRoute() {
-    const hash = window.location.hash || "";
-    if (hash.startsWith("#/shop/request")) {
-      setTimeout(initForm, 60);
-      setTimeout(initForm, 300);
-    } else if (hash.startsWith("#/account")) {
-      setTimeout(loadMyRequests, 100);
+    if ((window.location.hash || "").startsWith("#/shop/request")) {
+      setTimeout(initForm, 100);
+      setTimeout(initForm, 400);
     }
+
   }
 
   window.addEventListener("hashchange", handleRoute);
+  new MutationObserver(() => {
+    const f = document.querySelector("#ecoRequestForm");
+    if (f && f.dataset.asShopBound !== "1") initForm();
 
-  const observer = new MutationObserver(() => {
-    const form = document.querySelector("#ecoRequestForm");
-    if (form && form.dataset.asShopInit !== "1") {
-      initForm();
-    } else if (form) {
-      restoreFormState(form);
-    }
-  });
-
-  observer.observe(document.body, { childList: true, subtree: true });
+  }).observe(document.body, { childList: true, subtree: true });
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", handleRoute);

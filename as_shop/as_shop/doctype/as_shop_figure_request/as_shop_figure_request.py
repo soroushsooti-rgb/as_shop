@@ -16,7 +16,7 @@ class ASShopFigureRequest(Document):
         existing = frappe.db.exists(
             "AS Shop Figure Request",
             {
-                "owner": self.owner,
+                **({"customer_id": self.customer_id} if self.customer_id else {"owner": self.owner}),
                 "request_type": self.request_type,
                 "status": ("in", OPEN_STATUSES),
                 "name": ("!=", self.name or ""),

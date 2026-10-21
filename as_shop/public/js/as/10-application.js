@@ -5831,6 +5831,7 @@
     for (const id of ["ecoBasketForm", "ecoRequestForm"]) {
       const old = $("#" + id);
       if (!old) continue;
+      if (id === "ecoRequestForm") continue;
       const form = old.cloneNode(true);
       old.replaceWith(form);
       const combined = form.querySelector("[name=contact]");

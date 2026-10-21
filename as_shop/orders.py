@@ -120,12 +120,14 @@ def signed_request(envelope,signature):
     secret=frappe.conf.get("as_checkout_bridge_secret")
     if not secret:
         frappe.throw("Checkout connection is not configured.",frappe.PermissionError)
-    if not isinstance(envelope,str) or len(envelope)>100000:
+    if not isinstance(envelope,str) or len(envelope)>7*1024*1024:
         frappe.throw("Invalid checkout request.",frappe.PermissionError)
     expected=hmac.new(secret.encode(),envelope.encode(),hashlib.sha256).hexdigest()
     if not isinstance(signature,str) or not hmac.compare_digest(expected,signature):
         frappe.throw("Invalid checkout signature.",frappe.PermissionError)
     data=json.loads(envelope)
+    if len(envelope)>100000 and data.get("action")!="figure_submit":
+        frappe.throw("Invalid checkout request.",frappe.PermissionError)
     if data.get("issuer")!=frappe.conf.get("as_checkout_issuer","as-industries") or abs(time.time()-float(data.get("timestamp") or 0))>90:
         frappe.throw("Checkout request expired.",frappe.PermissionError)
     nonce=str(data.get("nonce") or "")
@@ -282,6 +284,9 @@ def service(envelope,signature):
         return preview(payload)
     if customer["id"]=="Guest":
         frappe.throw("Sign in first.",frappe.AuthenticationError)
+    if action in {"figure_submit", "figure_mine", "figure_admin", "figure_image", "figure_admin_image"}:
+        from as_shop.figure_requests import shared_service
+        return shared_service(action, payload, customer)
     if action=="start":
         return request_new_order(payload,customer)
     if action in {"order","reconcile"}:
