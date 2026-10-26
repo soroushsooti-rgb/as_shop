@@ -11,6 +11,7 @@
   /** Keep legacy shop links on AS Shop and industrial links on AS Industries. */
   function destination(site, route) {
     const path = route.split("?")[0];
+    if (path === "/partners/shahrniaz") return "shahrniaz";
     // Both AS websites use the existing Industries account and Frappe User records.
     if ((site === "shop" || site === "as") && /^\/(account|profile|orders|checkout|tickets)(\/|$)/.test(path)) return "as";
     if (site === "as" && /^\/(shop|nixa)(\/|$)/.test(path)) return "shop";
@@ -21,6 +22,7 @@
 
   /** Preserve language and the section's own route when crossing websites. */
   function targetURL(site, route = "/") {
+    if (site === "shahrniaz") return config.app_urls.shahrniaz;
     const url = new URL(config.app_urls[site], location.origin);
     url.searchParams.set("lang", window.SITE_LANGUAGE || document.documentElement.lang || "en");
     if (site !== "panel") url.hash = route.startsWith("/") ? route : "/";
@@ -95,7 +97,7 @@
       .then(payload => {
         const directory = payload.message || payload;
         for (const entry of directory.applications || []) {
-          if (!Object.hasOwn(config.app_urls, entry.id)) continue;
+          if (entry.id === "shahrniaz" || !Object.hasOwn(config.app_urls, entry.id)) continue;
           const url = new URL(entry.url, location.origin);
           if (["http:", "https:"].includes(url.protocol) && !url.username && !url.password) config.app_urls[entry.id] = url.href;
         }

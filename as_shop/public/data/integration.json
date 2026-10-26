@@ -2,7 +2,7 @@
   "app_id": "shop",
   "app_urls": {
     "panel": "/shn",
-    "shahrniaz": "/shahrniaz",
+    "shahrniaz": "https://www.shahrniaz.ae/",
     "as": "/as-industries",
     "shop": "/as-shop"
   },
