@@ -1,12 +1,8 @@
 (function () {
   "use strict";
 
-  window.__AS_SHOP_FORM_STATE__ = window.__AS_SHOP_FORM_STATE__ || {
-    type: "", design: "", name: "", contact: "", size: "Not sure yet",
-    quantity: "1", details: "", file: null,
-    filePreviewUrl: "", fileName: ""
-  };
-  const state = window.__AS_SHOP_FORM_STATE__;
+  const drafts = window.__AS_SHOP_FORM_DRAFTS__ ||
+    (window.__AS_SHOP_FORM_DRAFTS__ = Object.create(null));
 
   function sharedAccount(action, formData, onPending) {
     const accountURL = new URL(window.SHN_INTEGRATION.app_urls.as, location.origin);
@@ -49,7 +45,7 @@
     return new URLSearchParams(hash.substring(qIndex)).get(key);
   }
 
-  function captureFormState(form) {
+  function captureFormState(form, state) {
     if (!form) return;
     const typeEl = form.querySelector('input[name="ecoType"]:checked');
     state.type = typeEl?.value || form.querySelector('[name="type"]')?.value || state.type || getQueryParam("type") || "";
@@ -66,7 +62,7 @@
     state.details = form.querySelector("#ecoDetails")?.value || "";
   }
 
-  function restoreFormState(form) {
+  function restoreFormState(form, state) {
     if (!form) return;
     for (const el of form.elements) {
       if (!el.name || !state.fields || !(el.name in state.fields)) continue;
@@ -98,6 +94,13 @@
   function initForm() {
     let form = document.querySelector("#ecoRequestForm");
     if (!form || form.dataset.asShopBound === "1") return;
+    const draftKey = location.hash || location.pathname;
+    const saved = drafts[draftKey];
+    const state = saved || (drafts[draftKey] = {
+      type: "", design: "", name: "", contact: "", size: "Not sure yet",
+      quantity: "1", details: "", file: null, filePreviewUrl: "", fileName: ""
+    });
+    window.__AS_SHOP_FORM_STATE__ = state;
     // Remove offline preview handlers before owning file and submit events.
     const clean = form.cloneNode(true);
     form.replaceWith(clean);
@@ -110,6 +113,7 @@
       const field = form.querySelector('[name="' + name + '"]');
       if (field && !field.id) field.id = id;
     }
+    if (!saved) captureFormState(form, state);
     const upload = form.querySelector("#ecoReference");
     if (upload) upload.accept = "image/jpeg,image/png,image/webp";
     const details = form.querySelector("#ecoDetails");
@@ -126,9 +130,21 @@
     form.append(status);
     const typeParam = getQueryParam("type");
     if (typeParam && !state.type) state.type = typeParam;
-    const designParam = getQueryParam("design");
+    const designParam = getQueryParam("item") || getQueryParam("design");
     if (designParam && !state.design) state.design = designParam;
-    restoreFormState(form);
+    restoreFormState(form, state);
+    if (typeParam === "kitchen") {
+      const note = form.querySelector("#ecoFileNote");
+      if (note) note.textContent = document.documentElement.lang === "fa"
+        ? "اختیاری: عکس JPG، PNG یا WebP تا ۵ مگابایت."
+        : "Optional: JPG, PNG or WebP image, up to 5 MB.";
+      const design = form.querySelector("#ecoDesign");
+      if (design) design.placeholder = "Product name or reference";
+      const intro = document.querySelector(".eco-subhero > p");
+      if (intro) intro.textContent = document.documentElement.lang === "fa"
+        ? "ابعاد، رنگ، جنس و تعداد را بنویسید. درخواست در حساب شما ثبت می‌شود و پیش از ساخت، قیمت را اعلام می‌کنیم."
+        : "Share dimensions, colour, material and quantity. Your request is saved to your account; we confirm a quote before production.";
+    }
 
     if (state.filePreviewUrl) {
       const p = form.querySelector("#ecoReferencePreview") || document.querySelector("#ecoReferencePreview");
@@ -138,10 +154,10 @@
       const n = form.querySelector("#ecoFileNote") || document.querySelector("#ecoFileNote");
       if (n) n.textContent = `Attached: ${state.fileName}`;
     }
-    form.addEventListener("input", (event) => { if (event.target.type !== "file") captureFormState(form); }, true);
+    form.addEventListener("input", (event) => { if (event.target.type !== "file") captureFormState(form, state); }, true);
 
     form.addEventListener("change", (e) => {
-      captureFormState(form);
+      captureFormState(form, state);
       const el = e.target;
       if (el.id === "ecoReference") {
         el.setCustomValidity("");
@@ -171,8 +187,8 @@
           image.alt = "Your reference photo";
           stage.replaceChildren(image);
         }
-        setTimeout(() => restoreFormState(document.querySelector("#ecoRequestForm")), 0);
-        setTimeout(() => restoreFormState(document.querySelector("#ecoRequestForm")), 100);
+        setTimeout(() => form.isConnected && restoreFormState(form, state), 0);
+        setTimeout(() => form.isConnected && restoreFormState(form, state), 100);
       }
     }, true);
     form.addEventListener("submit", async function (e) {
@@ -180,7 +196,7 @@
       e.stopPropagation();
       e.stopImmediatePropagation();
       if (form.dataset.submitting === "1") return;
-      captureFormState(form);
+      captureFormState(form, state);
       if (!form.reportValidity()) return;
       form.dataset.submitting = "1";
 
@@ -217,7 +233,9 @@
         link.className = "button primary";
         link.textContent = document.documentElement.lang === "fa" ? "مشاهده در سفارش‌های من" : "View in My Orders";
         status.append(link);
-        state.fields = {}; state.type = ""; state.design = ""; state.name = ""; state.contact = "";
+        state.fields = {}; state.type = typeParam || "";
+        state.design = form.querySelector("#ecoDesign")?.defaultValue || designParam || "";
+        state.name = ""; state.contact = "";
         state.size = "Not sure yet"; state.quantity = "1"; state.details = ""; state.file = null;
         if (state.filePreviewUrl) URL.revokeObjectURL(state.filePreviewUrl);
         state.filePreviewUrl = ""; state.fileName = "";

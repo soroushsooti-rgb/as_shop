@@ -109,7 +109,10 @@ def shared_service(action, payload, customer):
         content = base64.b64decode(raw, validate=True) if raw else None
         return create_request(payload.get("fields") or {}, customer_id, content, payload.get("filename"))
     if action == "figure_admin":
-        filters = {"request_type": "family"}
+        request_type = payload.get("request_type") or "family"
+        if request_type not in {"family", "kitchen"}:
+            frappe.throw(_("Invalid request type"))
+        filters = {"request_type": request_type}
     elif action in {"figure_mine", "figure_image"}:
         filters = {"customer_id": customer_id}
     elif action == "figure_admin_image":
@@ -128,7 +131,7 @@ def shared_service(action, payload, customer):
         return {"image": "data:" + (mimetypes.guess_type(file.file_name)[0] or "image/png") +
                 ";base64," + base64.b64encode(content).decode()}
     rows = frappe.get_all(FIGURE_REQUEST, filters=filters,
-        fields=["name","request_type","full_name","contact","preferred_size","quantity","details",
+        fields=["name","request_type","design_reference","full_name","contact","preferred_size","quantity","details",
                 "reference_image","status","creation"], order_by="creation desc",
         limit_start=max(0, frappe.utils.cint(payload.get("start"))), limit_page_length=21)
     return {"requests": rows[:20], "has_more": len(rows) > 20}

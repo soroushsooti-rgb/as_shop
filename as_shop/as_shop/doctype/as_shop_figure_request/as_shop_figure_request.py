@@ -13,11 +13,13 @@ class ASShopFigureRequest(Document):
         if not self.quantity or int(self.quantity) < 1:
             frappe.throw(_("Quantity must be at least 1"))
 
+        self.design_reference = (self.design_reference or "").strip()
         existing = frappe.db.exists(
             "AS Shop Figure Request",
             {
                 **({"customer_id": self.customer_id} if self.customer_id else {"owner": self.owner}),
                 "request_type": self.request_type,
+                **({"design_reference": self.design_reference} if self.request_type == "kitchen" else {}),
                 "status": ("in", OPEN_STATUSES),
                 "name": ("!=", self.name or ""),
             },
